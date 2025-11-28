@@ -15,5 +15,7 @@ namespace EntityLayer.Concreate
         public string UserMail { get; set; }
         public string Subject { get; set; }
         public string Message { get; set; }
+        public bool ContactStatus { get; set; }
+
     }
 }

@@ -53,6 +53,15 @@
   <ItemGroup>
     <Compile Include="Configurations\AboutConfig.cs" />
     <Compile Include="Context\MvcKampContext.cs" />
+    <Compile Include="Migrations\202511281733462_InitiaCreate.cs" />
+    <Compile Include="Migrations\202511281733462_InitiaCreate.Designer.cs">
+      <DependentUpon>202511281733462_InitiaCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202511281748318_AddedStatusForAllTable.cs" />
+    <Compile Include="Migrations\202511281748318_AddedStatusForAllTable.Designer.cs">
+      <DependentUpon>202511281748318_AddedStatusForAllTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +73,14 @@
       <Project>{36805BA2-BDA5-4F61-A548-B17855AF2CB0}</Project>
       <Name>EntityLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202511281733462_InitiaCreate.resx">
+      <DependentUpon>202511281733462_InitiaCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202511281748318_AddedStatusForAllTable.resx">
+      <DependentUpon>202511281748318_AddedStatusForAllTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
