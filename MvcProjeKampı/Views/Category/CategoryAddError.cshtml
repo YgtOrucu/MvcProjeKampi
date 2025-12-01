@@ -1,0 +1,19 @@
+﻿
+@{
+    Layout = null;
+    var errors = TempData["ValidationErrors"] as string;
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<div class="container mt-4">
+    <div class="card shadow-lg border-0">
+        <div class="card-body">
+            <h4 class="card-title text-danger mb-3">Hata Oluştu</h4>
+
+            <div class="alert alert-danger" role="alert">
+                @Html.Raw(errors)
+            </div>
+
+            <a href="@Url.Action("CategoryAdd")" class="btn btn-primary">Geri Dön</a>
+        </div>
+    </div>
+</div>

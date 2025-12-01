@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = null;
+}
+
+<h3>Category Add</h3>
+<br />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<form action="~/Category/CategoryAdd" method="post">
+    <label for="CategoryName">CategoryName</label>
+    <input class="form-control" style="width:60%" type="text" name="CategoryName" id="CategoryName" placeholder="Category Name" />
+    <br />
+    <label for="CategoryDescription">CategoryDescription</label>
+    <input class="form-control" style="width:60%" type="text" name="CategoryDescription" id="CategoryDescription" placeholder="Category Name" />
+    <br />
+    <label for="CategoryStatus">CategoryStatus</label>
+    <div class="form-check-inline">
+        <div class="form-check">
+            <input class="form-check-input" id="durumAktif" name="CategoryStatus" type="radio" value="True">
+            <label class="form-check-label" for="durumAktif">Aktif</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" id="durumPasif" name="CategoryStatus" type="radio" value="False">
+            <label class="form-check-label" for="durumPasif">Pasif</label>
+        </div>
+    </div>
+    <br />
+    <input type="submit" value="Category Add" class="btn btn-primary btn-sm" />
+</form>
