@@ -17,9 +17,11 @@ namespace MvcProjeKampı.Controllers
     {
         #region ConstructorMethods
         private readonly ICategoryService _categoryService;
+        private readonly IWriterService _writerService;
         public AdminController()
         {
             _categoryService = new CategoryManager(new EFCategoryDal(), new CategoryValitadions());
+            _writerService = new WriterManager(new EFWriterDal());
         }
         #endregion
 
@@ -80,6 +82,14 @@ namespace MvcProjeKampı.Controllers
                 TempData["ValidationErrors"] = errormessage;
                 return RedirectToAction("CategoryErrors");
             } 
+        }
+        #endregion
+
+        #region WriterOperation
+        public ActionResult Writer()
+        {
+            var values = _writerService.TGetList();
+            return View(values);
         }
         #endregion
     }

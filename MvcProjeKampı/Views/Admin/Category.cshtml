@@ -12,7 +12,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>#</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Status</th>
@@ -24,7 +24,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.CategoryID</td>
+                        <td style="font-weight:bold">@item.CategoryID</td>
                         <td>@item.CategoryName</td>
                         <td>@item.CategoryDescription</td>
                         @if (item.CategoryStatus)

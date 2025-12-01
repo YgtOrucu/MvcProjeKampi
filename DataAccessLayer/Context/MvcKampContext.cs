@@ -59,8 +59,9 @@ namespace DataAccessLayer.Context
             modelBuilder.Entity<Writer>().Property(x => x.WriterName).HasColumnType("varchar").HasMaxLength(30);
             modelBuilder.Entity<Writer>().Property(x => x.WriterSurname).HasColumnType("varchar").HasMaxLength(30);
             modelBuilder.Entity<Writer>().Property(x => x.WriterImage).HasColumnType("varchar").HasMaxLength(100);
+            modelBuilder.Entity<Writer>().Property(x => x.WriterAbout).HasColumnType("varchar").HasMaxLength(100);
             modelBuilder.Entity<Writer>().Property(x => x.WriterMail).HasColumnType("varchar").HasMaxLength(50);
-            modelBuilder.Entity<Writer>().Property(x => x.WriterPassword).HasColumnType("varchar").HasMaxLength(20);
+            modelBuilder.Entity<Writer>().Property(x => x.WriterPassword).HasColumnType("varchar").HasMaxLength(200);
             #endregion
         }
     }

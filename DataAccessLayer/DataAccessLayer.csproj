@@ -74,6 +74,10 @@
     <Compile Include="Migrations\202511281748318_AddedStatusForAllTable.Designer.cs">
       <DependentUpon>202511281748318_AddedStatusForAllTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202512011524364_AddedWriterAboutColumnInWriterTable.cs" />
+    <Compile Include="Migrations\202512011524364_AddedWriterAboutColumnInWriterTable.Designer.cs">
+      <DependentUpon>202512011524364_AddedWriterAboutColumnInWriterTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
@@ -94,6 +98,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202511281748318_AddedStatusForAllTable.resx">
       <DependentUpon>202511281748318_AddedStatusForAllTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202512011524364_AddedWriterAboutColumnInWriterTable.resx">
+      <DependentUpon>202512011524364_AddedWriterAboutColumnInWriterTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
