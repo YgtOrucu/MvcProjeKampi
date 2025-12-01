@@ -1,0 +1,45 @@
+﻿@model EntityLayer.Concreate.Category
+@{
+    ViewBag.Title = "CategoryEdit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="title">Category Edit</div>
+<form action="~/Admin/CategoryUpdate" method="post" class="nice-form">
+    <div class="field">
+        <label for="CategoryID">Category ID</label>
+        @Html.TextBoxFor(x => x.CategoryID, new { @class = "input", @readonly = "readonly" })
+    </div>
+
+    <div class="field">
+        <label for="CategoryName">Category Name</label>
+        @Html.TextBoxFor(x => x.CategoryName, new { @class = "input" })
+    </div>
+
+    <div class="field">
+        <label for="CategoryDescription">Category Description</label>
+        @Html.TextBoxFor(x => x.CategoryDescription, new { @class = "input" })
+    </div>
+
+    <div class="field">
+        <label for="CategoryStatus">Category Status</label>
+
+        <div class="radio-group">
+            <label class="radio">
+                @Html.RadioButtonFor(x => x.CategoryStatus, true)
+                <span>Active</span>
+            </label>
+
+            <label class="radio">
+                @Html.RadioButtonFor(x => x.CategoryStatus, false)
+                <span>Pasive</span>
+            </label>
+        </div>
+
+    </div>
+    <div class="filter">
+        <button type="submit" class="submit-btn">Category Edit</button>
+        <a href="~/Admin/Category" class="btn-danger">Return Category Page</a>
+    </div>
+</form>
+

@@ -1,0 +1,49 @@
+﻿@using EntityLayer.Concreate
+@model List<Category>
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="table-card">
+    <div class="title">Category List</div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.CategoryID</td>
+                        <td>@item.CategoryName</td>
+                        <td>@item.CategoryDescription</td>
+                        @if (item.CategoryStatus)
+                        {
+                            <td><span class="badge success">Aktif</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge danger ">Pasif</span></td>
+                        }
+                        <td><a href="/Admin/CategoryEdit/@item.CategoryID" class="btn btn-warning btn-sm">Edit</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="/Admin/CategoryAdd" class="add-btn">Add Category</a>
+    </div>
+</div>
+
+
+
+

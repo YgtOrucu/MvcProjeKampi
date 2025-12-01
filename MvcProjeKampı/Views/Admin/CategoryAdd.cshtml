@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "CategoryAdd";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="title">Category Add</div>
+<form action="~/Admin/CategoryAdd" method="post" class="nice-form">
+    <div class="field">
+        <label for="CategoryName">Category Name</label>
+        <input class="input" type="text" name="CategoryName" id="CategoryName" placeholder="Category Name" />
+    </div>
+
+    <div class="field">
+        <label for="CategoryDescription">Category Description</label>
+        <input class="input" type="text" name="CategoryDescription" id="CategoryDescription" placeholder="Category Description" />
+    </div>
+
+    <div class="field">
+        <label for="CategoryStatus">Category Status</label>
+
+        <div class="radio-group">
+            <label class="radio">
+                <input type="radio" name="CategoryStatus" value="True">
+                <span>Active</span>
+            </label>
+
+            <label class="radio">
+                <input type="radio" name="CategoryStatus" value="False">
+                <span>Pasive</span>
+            </label>
+        </div>
+
+    </div>
+    <div class="filter">
+        <button type="submit" class="submit-btn">Category Add</button>
+        <a href="~/Admin/Category" class="btn-danger">Return Category Page</a>
+    </div>
+</form>
+
