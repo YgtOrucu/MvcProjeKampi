@@ -1,8 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "CategoryErrors";
+    ViewBag.Title = "ErrorPages";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     var errors = TempData["ValidationErrors"] as string;
+    var RedirectToAction = TempData["RedirectToAction"] as string;
 }
 
 <div class="error-card">
@@ -12,5 +13,5 @@
         @Html.Raw(errors)
     </div>
 
-    <a href="@Url.Action("Category")" class="return-btn">Return</a>
+    <a href="@Url.Action(RedirectToAction)" class="return-btn">Return</a>
 </div>

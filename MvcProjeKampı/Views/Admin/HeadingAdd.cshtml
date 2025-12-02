@@ -1,0 +1,51 @@
+﻿@model EntityLayer.Concreate.Heading
+@{
+    ViewBag.Title = "HeadingAdd";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="title">Heading Add</div>
+<form action="~/Admin/HeadingAdd" method="post" class="nice-form">
+    <div class="field">
+        <label for="HeadingName">Heading Name</label>
+        <input class="input" type="text" name="HeadingName" id="HeadingName" placeholder="Heading Name" />
+    </div>
+
+    <div class="field">
+        <label for="HeadingDate">Heading Date</label>
+        <input class="input" type="text" name="HeadingDate" id="HeadingDate" placeholder="Gün/Ay/Yıl" />
+    </div>
+
+    <div class="field">
+        <label for="CategoryID">Category</label>
+        @Html.DropDownListFor(x=>x.CategoryID, (IEnumerable<SelectListItem>)ViewBag.Categories, new {@class = "input" })
+    </div>
+
+    <div class="field">
+        <label for="WriterID">Writer</label>
+        @Html.DropDownListFor(x => x.WriterID, (IEnumerable<SelectListItem>)ViewBag.Writer, new { @class = "input" })
+    </div>
+
+    <div class="field">
+        <label for="HeadingStatus">Heading Status</label>
+
+        <div class="radio-group">
+            <label class="radio">
+                <input type="radio" name="HeadingStatus" value="True">
+                <span>Active</span>
+            </label>
+
+            <label class="radio">
+                <input type="radio" name="HeadingStatus" value="False">
+                <span>Pasive</span>
+            </label>
+        </div>
+
+    </div>
+    <div class="filter">
+        <button type="submit" class="submit-btn">Heading Add</button>
+        <a href="~/Admin/Heading" class="btn-danger">Return Heading Page</a>
+    </div>
+</form>
+
+

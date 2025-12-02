@@ -2292,8 +2292,12 @@
     <Content Include="Views\Admin\Category.cshtml" />
     <Content Include="Views\Admin\CategoryAdd.cshtml" />
     <Content Include="Views\Admin\CategoryEdit.cshtml" />
-    <Content Include="Views\Admin\CategoryErrors.cshtml" />
     <Content Include="Views\Admin\Writer.cshtml" />
+    <Content Include="Views\Admin\WriterAdd.cshtml" />
+    <Content Include="Views\Admin\ErrorPages.cshtml" />
+    <Content Include="Views\Admin\WriterEdit.cshtml" />
+    <Content Include="Views\Admin\Heading.cshtml" />
+    <Content Include="Views\Admin\HeadingAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.Valitadions;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concreate;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +15,11 @@ namespace BusinessLayer.Concreate
     public class HeadingManager : IHeadingService
     {
         private readonly IHeadingDal _headingDal;
-        public HeadingManager(IHeadingDal headingDal)
+        private readonly HeadingValidation _validationRulesHeading;
+        public HeadingManager(IHeadingDal headingDal, HeadingValidation validationRulesHeading)
         {
             _headingDal = headingDal;
+            _validationRulesHeading = validationRulesHeading;
         }
         public void TDelete(Heading entity)
         {
@@ -34,6 +38,13 @@ namespace BusinessLayer.Concreate
 
         public void TInsert(Heading entity)
         {
+            Heading heading = new Heading()
+            {
+                HeadingName = entity.HeadingName,
+                HeadingDate = entity.HeadingDate
+            };
+            var result = _validationRulesHeading.Validate(heading);
+            if (!result.IsValid) throw new ValidationException(result.Errors);
             _headingDal.Insert(entity);
         }
 

@@ -50,6 +50,11 @@ namespace BusinessLayer.Concreate
             _categoryDal.Insert(entity);
         }
 
+        public List<Category> TListCategorytoIDandNameforWriterTable()
+        {
+            return _categoryDal.ListCategorytoIDandNameforWriterTable();
+        }
+
         public List<Category> TListToFilter(Expression<Func<Category, bool>> filter)
         {
             return _categoryDal.ListToFilter(filter);
@@ -57,6 +62,12 @@ namespace BusinessLayer.Concreate
 
         public void TUpdate(Category entity)
         {
+            Category category = new Category()
+            {
+                CategoryName = entity.CategoryName
+            };
+            var result = _validationRulesCategory.Validate(category);
+            if (!result.IsValid) throw new ValidationException(result.Errors);
             _categoryDal.Update(entity);
         }
     }

@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "WriterAdd";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="title">Writer Add</div>
+<form action="~/Admin/WriterAdd" method="post" class="nice-form">
+    <div class="field">
+        <label for="WriterName">Writer Name</label>
+        <input class="input" type="text" name="WriterName" id="WriterName" placeholder="Writer Name" />
+    </div>
+
+    <div class="field">
+        <label for="WriterSurname">Writer Surname</label>
+        <input class="input" type="text" name="WriterSurname" id="WriterSurname" placeholder="Writer Surname" />
+    </div>
+
+
+    <div class="field">
+        <label for="WriterImage">Writer Image</label>
+        <input class="input" type="text" name="WriterImage" id="WriterImage" placeholder="Writer Image" />
+    </div>
+
+
+    <div class="field">
+        <label for="WriterMail">Writer Mail</label>
+        <input class="input" type="text" name="WriterMail" id="WriterMail" placeholder="Writer Mail" />
+    </div>
+
+    <div class="field">
+        <label for="WriterPassword">Writer Password</label>
+        <input class="input" type="text" name="WriterPassword" id="WriterPassword" placeholder="Writer Password" />
+    </div>
+
+    <div class="field">
+        <label for="WriterAbout">Writer About</label>
+        <input class="input" type="text" name="WriterAbout" id="WriterAbout" placeholder="Writer About" />
+    </div>
+
+    <div class="field">
+        <label for="WriterStatus">Writer Status</label>
+
+        <div class="radio-group">
+            <label class="radio">
+                <input type="radio" name="WriterStatus" value="True">
+                <span>Active</span>
+            </label>
+
+            <label class="radio">
+                <input type="radio" name="WriterStatus" value="False">
+                <span>Pasive</span>
+            </label>
+        </div>
+
+    </div>
+    <div class="filter">
+        <button type="submit" class="submit-btn">Writer Add</button>
+        <a href="~/Admin/Writer" class="btn-danger">Return Writer Page</a>
+    </div>
+</form>
+
+

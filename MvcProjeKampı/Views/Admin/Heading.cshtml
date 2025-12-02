@@ -1,0 +1,53 @@
+﻿@using EntityLayer.Concreate
+@model List<Heading>
+@{
+    ViewBag.Title = "Heading";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="table-card">
+    <div class="title">Heading List</div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Writer</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="font-weight:bold">@item.HeadingID</td>
+                        <td>@item.HeadingName</td>
+                        <td>@item.HeadingDate.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Category.CategoryName</td>
+                        <td>@item.Writer.WriterName @item.Writer.WriterSurname</td>
+                        @if (item.HeadingStatus)
+                        {
+                            <td><span class="badge success">Aktif</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge danger ">Pasif</span></td>
+                        }
+                        <td><a href="/Admin/HeadingEdit/@item.HeadingID" class="btn btn-warning btn-sm">Edit</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="/Admin/HeadingAdd" class="add-btn">Add Heading</a>
+    </div>
+</div>
+
+
+
+

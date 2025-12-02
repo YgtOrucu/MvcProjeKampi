@@ -18,18 +18,23 @@ namespace MvcProjeKampı.Controllers
         #region ConstructorMethods
         private readonly ICategoryService _categoryService;
         private readonly IWriterService _writerService;
+        private readonly IHeadingService _headingService;
         public AdminController()
         {
             _categoryService = new CategoryManager(new EFCategoryDal(), new CategoryValitadions());
-            _writerService = new WriterManager(new EFWriterDal());
+            _writerService = new WriterManager(new EFWriterDal(), new WriterValitadion());
+            _headingService = new HeadingManager(new EFHeadingDal(),new HeadingValidation());
+        }
+        #endregion
+
+        #region ErrorPage
+        public ActionResult ErrorPages()
+        {
+            return View();
         }
         #endregion
 
         #region CategoryOperations
-        public ActionResult CategoryErrors()
-        {
-            return View();
-        }
 
         public ActionResult Category()
         {
@@ -54,7 +59,8 @@ namespace MvcProjeKampı.Controllers
             {
                 var errormessage = string.Join("<br>", ex.Errors.Select(x => x.ErrorMessage));
                 TempData["ValidationErrors"] = errormessage;
-                return RedirectToAction("CategoryErrors");
+                TempData["RedirectToAction"] = "Category";
+                return RedirectToAction("ErrorPages");
             }
         }
 
@@ -76,12 +82,13 @@ namespace MvcProjeKampı.Controllers
                 _categoryService.TUpdate(updetedCategory);
                 return RedirectToAction("Category");
             }
-            catch (Exception ex)
+            catch (ValidationException ex)
             {
-                var errormessage = string.Join("<br>", ex.Message.ToString());
+                var errormessage = string.Join("<br>", ex.Errors.Select(x => x.ErrorMessage));
                 TempData["ValidationErrors"] = errormessage;
-                return RedirectToAction("CategoryErrors");
-            } 
+                TempData["RedirectToAction"] = "Category";
+                return RedirectToAction("ErrorPages");
+            }
         }
         #endregion
 
@@ -90,6 +97,118 @@ namespace MvcProjeKampı.Controllers
         {
             var values = _writerService.TGetList();
             return View(values);
+        }
+        [HttpGet]
+        public ActionResult WriterAdd()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult WriterAdd(Writer w)
+        {
+            try
+            {
+                _writerService.TInsert(w);
+                return RedirectToAction("Writer");
+
+            }
+            catch (ValidationException ex)
+            {
+                var errormessage = string.Join("<br>", ex.Errors.Select(x => x.ErrorMessage));
+                TempData["ValidationErrors"] = errormessage;
+                TempData["RedirectToAction"] = "Writer";
+                return RedirectToAction("ErrorPages");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult WriterEdit(int id)
+        {
+            var getWriter = _writerService.TGetID(id);
+            return View("WriterEdit", getWriter);
+        }
+        [HttpPost]
+        public ActionResult WriterUpdate(Writer w)
+        {
+            try
+            {
+                var updatedWriter = _writerService.TGetID(w.WriterID);
+                updatedWriter.WriterName = w.WriterName;
+                updatedWriter.WriterSurname = w.WriterSurname;
+                updatedWriter.WriterImage = w.WriterImage;
+                updatedWriter.WriterMail = w.WriterMail;
+                updatedWriter.WriterPassword = w.WriterPassword;
+                updatedWriter.WriterAbout = w.WriterAbout;
+                updatedWriter.WriterStatus = w.WriterStatus;
+                _writerService.TUpdate(updatedWriter);
+                return RedirectToAction("Writer");
+            }
+            catch (ValidationException ex)
+            {
+                var errormessage = string.Join("<br>", ex.Errors.Select(x => x.ErrorMessage));
+                TempData["ValidationErrors"] = errormessage;
+                TempData["RedirectToAction"] = "Writer";
+                return RedirectToAction("ErrorPages");
+            }
+        }
+        #endregion
+
+        #region HeadingOperations
+        public ActionResult Heading()
+        {
+            var values = _headingService.TGetList();
+            return View(values);
+        }
+        [HttpGet]
+        public ActionResult HeadingAdd()
+        {
+            #region CategoryListForDropDown
+            List<SelectListItem> selectListItemsCategory = new List<SelectListItem>();
+            var categories = _categoryService.TListCategorytoIDandNameforWriterTable();
+
+            foreach (var item in categories)
+            {
+                selectListItemsCategory.Add(new SelectListItem
+                {
+                    Value = item.CategoryID.ToString(),
+                    Text = item.CategoryName
+                });
+            }
+            ViewBag.Categories = selectListItemsCategory;
+            #endregion
+
+            #region WriterListForDropDown
+            List<SelectListItem> selectListItemsWriter = new List<SelectListItem>();
+            var writer = _writerService.TListWritertoIDandNameforWriterTable();
+            foreach (var item in writer)
+            {
+                selectListItemsWriter.Add(new SelectListItem
+                {
+                    Value = item.WriterID.ToString(),
+                    Text = item.WriterName + " " + item.WriterSurname
+                });
+            }
+            ViewBag.Writer = selectListItemsWriter;
+            #endregion
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult HeadingAdd(Heading h) 
+        {
+            try
+            {
+                _headingService.TInsert(h);
+                return RedirectToAction("Heading");
+
+            }
+            catch (ValidationException ex)
+            {
+                var errormessage = string.Join("<br>", ex.Errors.Select(x => x.ErrorMessage));
+                TempData["ValidationErrors"] = errormessage;
+                TempData["RedirectToAction"] = "Heading";
+                return RedirectToAction("ErrorPages");
+            }
         }
         #endregion
     }

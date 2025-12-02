@@ -1,21 +1,21 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.Valitadions;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concreate;
 using System;
+using FluentValidation;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace BusinessLayer.Concreate
 {
     public class WriterManager : IWriterService
     {
         private readonly IWriterDal _writerDal;
-        public WriterManager(IWriterDal writerDal)
+        private readonly WriterValitadion _WritervalidationRules;
+        public WriterManager(IWriterDal writerDal,WriterValitadion WritervalidationRules)
         {
             _writerDal = writerDal;
+            _WritervalidationRules = WritervalidationRules;
         }
         public void TDelete(Writer entity)
         {
@@ -34,6 +34,15 @@ namespace BusinessLayer.Concreate
 
         public void TInsert(Writer entity)
         {
+            Writer writer = new Writer()
+            {
+                WriterName = entity.WriterName,
+                WriterSurname = entity.WriterSurname,
+                WriterAbout = entity.WriterAbout,
+                WriterMail = entity.WriterMail,
+            };
+            var result = _WritervalidationRules.Validate(writer);
+            if(!result.IsValid) throw new ValidationException(result.Errors);
             _writerDal.Insert(entity);
         }
 
@@ -42,8 +51,22 @@ namespace BusinessLayer.Concreate
             return _writerDal.ListToFilter(filter);
         }
 
+        public List<Writer> TListWritertoIDandNameforWriterTable()
+        {
+            return _writerDal.ListWritertoIDandNameforWriterTable();
+        }
+
         public void TUpdate(Writer entity)
         {
+            Writer writer = new Writer()
+            {
+                WriterName = entity.WriterName,
+                WriterSurname = entity.WriterSurname,
+                WriterAbout = entity.WriterAbout,
+                WriterMail = entity.WriterMail,
+            };
+            var result = _WritervalidationRules.Validate(writer);
+            if (!result.IsValid) throw new ValidationException(result.Errors);
             _writerDal.Update(entity);
         }
     }
