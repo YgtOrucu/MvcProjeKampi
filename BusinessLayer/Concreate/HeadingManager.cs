@@ -36,6 +36,11 @@ namespace BusinessLayer.Concreate
             return _headingDal.GetList();
         }
 
+        public List<Heading> TGetListByWriter(int id)
+        {
+            return _headingDal.GetListByWriter(id);
+        }
+
         public void TInsert(Heading entity)
         {
             Heading heading = new Heading()

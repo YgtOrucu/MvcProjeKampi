@@ -23,7 +23,7 @@ namespace MvcProjeKampı.Controllers
         {
             _categoryService = new CategoryManager(new EFCategoryDal(), new CategoryValitadions());
             _writerService = new WriterManager(new EFWriterDal(), new WriterValitadion());
-            _headingService = new HeadingManager(new EFHeadingDal(),new HeadingValidation());
+            _headingService = new HeadingManager(new EFHeadingDal(), new HeadingValidation());
         }
         #endregion
 
@@ -97,6 +97,13 @@ namespace MvcProjeKampı.Controllers
         {
             var values = _writerService.TGetList();
             return View(values);
+        }
+
+        [HttpGet]
+        public ActionResult WritersHeading(int id)
+        {
+            var getWritersHeading = _headingService.TGetListByWriter(id);
+            return View("WritersHeading", getWritersHeading);
         }
         [HttpGet]
         public ActionResult WriterAdd()
@@ -194,7 +201,7 @@ namespace MvcProjeKampı.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult HeadingAdd(Heading h) 
+        public ActionResult HeadingAdd(Heading h)
         {
             try
             {
@@ -209,6 +216,26 @@ namespace MvcProjeKampı.Controllers
                 TempData["RedirectToAction"] = "Heading";
                 return RedirectToAction("ErrorPages");
             }
+        }
+
+        [HttpGet]
+        public ActionResult HeadingEdit(int id)
+        {
+            var getHeading = _headingService.TGetID(id);
+            return RedirectToAction("HeadingEdit", getHeading);
+        }
+
+        [HttpPost]
+        public ActionResult HeadingUptade(Heading h)
+        {
+            var updatedheading = _headingService.TGetID(h.HeadingID);
+            updatedheading.HeadingName = h.HeadingName;
+            updatedheading.HeadingDate = h.HeadingDate;
+            updatedheading.CategoryID = h.CategoryID;
+            updatedheading.WriterID = h.WriterID;
+            updatedheading.HeadingStatus = h.HeadingStatus;
+            _headingService.TUpdate(updatedheading);
+            return RedirectToAction("Heading");
         }
         #endregion
     }

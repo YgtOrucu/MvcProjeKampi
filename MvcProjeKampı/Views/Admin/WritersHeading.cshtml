@@ -1,0 +1,66 @@
+﻿@using EntityLayer.Concreate
+@model List<Heading>
+@{
+    ViewBag.Title = "WritersHeading";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="WriterTitle">Writer's Heading</div>
+    <div class="card-body p-0">
+        <table class="table table-striped projects">
+            <thead>
+                <tr>
+                    <th>Heading Name</th>
+                    <th>Writer Created</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    string BadgeColor = "";
+                    switch (item.Category.CategoryName)
+                    {
+                        case "Eğitim":
+                            BadgeColor = "badge-primary";
+                            break;
+                        case "Tiyatro":
+                            BadgeColor = "badge-warning";
+                            break;
+                        case "Kitap":
+                            BadgeColor = "badge-success";
+                            break;
+                        case "Spor":
+                            BadgeColor = "badge-danger";
+                            break;
+                        case "Film":
+                            BadgeColor = "badge-info";
+                            break;
+                        case "Dizi":
+                            BadgeColor = "badge-secondary";
+                            break;
+                        case "Sosyal Medya":
+                            BadgeColor = "badge-dark";
+                            break;
+                    }
+                    <tr>
+                        <td>
+                            @item.HeadingName<br /><small> @item.HeadingDate.ToString("dd/MM/yyyy")</small>
+                        </td>
+                        <td>
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <img alt="Avatar" class="table-avatar" src="@item.Writer.WriterImage">
+                                </li>
+                            </ul>
+                        </td>
+                        <td><span class="badge @BadgeColor">@item.Category.CategoryName</span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<a href="~/Admin/Writer" class="btn-danger" style="float:right">Return Writer Page</a>
+

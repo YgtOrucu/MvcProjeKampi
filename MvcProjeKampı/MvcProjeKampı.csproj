@@ -2298,6 +2298,8 @@
     <Content Include="Views\Admin\WriterEdit.cshtml" />
     <Content Include="Views\Admin\Heading.cshtml" />
     <Content Include="Views\Admin\HeadingAdd.cshtml" />
+    <Content Include="Views\Admin\HeadingEdit.cshtml" />
+    <Content Include="Views\Admin\WritersHeading.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
