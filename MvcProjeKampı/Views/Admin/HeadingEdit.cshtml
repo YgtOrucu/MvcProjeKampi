@@ -17,8 +17,8 @@
     </div>
 
     <div class="field">
-        <label for="HeadingDate">Heading Date</label>
-        @Html.TextBoxFor(x => x.HeadingDate, new { @class = "input" })
+        <label for="CategoryID">Category Name</label>
+        @Html.DropDownListFor(x => x.CategoryID, (IEnumerable<SelectListItem>)ViewBag.Categories, new { @class = "input" })
     </div>
 
     <div class="field">

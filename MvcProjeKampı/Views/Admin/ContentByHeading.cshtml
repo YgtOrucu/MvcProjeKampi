@@ -1,0 +1,59 @@
+﻿@using EntityLayer.Concreate
+@model List<Content>
+@{
+    ViewBag.Title = "ContentByHeading";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12" style="margin:1rem 0">
+                    <div class="card">
+                        <div class="card-body" style="background-color: blue;">
+                            <h3 style="color:#fff">Content By Heading</h3>
+                            <br />
+                            @foreach (var item in Model)
+                            {
+
+                                <div class="timeline-item" style="background:#b0d6db; border-radius: 10px; padding: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-left: 2.5rem; ">
+
+                                    <div style="display:flex; align-items:center; margin-bottom:0.5rem;">
+                                        <i class="fas fa-comment"
+                                           style="background: #0056B3; color: #fff; border-radius: 50%; padding: 10px; font-size: 17px; margin-right: 0.8rem;">
+                                        </i>
+                                        <span style="color:#0b0d2e; font-weight: bold; margin-right: 0.5rem;">@(item.Writer.WriterName + " " + item.Writer.WriterSurname)</span>
+                                        <div style="margin-left:auto">
+                                            @if ((bool)item.ContentStatus)
+                                            {
+                                                <span class="time badge bg-success text-xs" style="margin:3px 10px">Active</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="time badge bg-danger text-xs" style="margin:3px 10px">Pasive</span>
+                                            }
+                                        </div>
+                                    </div>
+                                    <span style="color: #0056B3;margin-bottom: 1rem;font-weight:bold"> <span style="color: black">Heading Name:</span>  @item.Heading.HeadingName</span>
+
+                                    <div style="margin: 15px 0; color: black;">
+                                        @item.ContentValue
+                                    </div>
+                                    <div style="font-size:0.85rem; color:#888;">
+                                        <i class="far fa-calendar" style="margin-right: 4px; color: black"></i><span style="font-weight: bold; color: black">@item.ContentDate.ToShortDateString()</span>
+                                    </div>
+                                </div>
+                                <hr />
+                            }
+                        </div>
+                    </div>
+                    <a href="~/Admin/Writer" class="btn-danger" style="float:right">Return Writer Page</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

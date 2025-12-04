@@ -32,6 +32,11 @@ namespace BusinessLayer.Concreate
             return _contentDal.GetList();
         }
 
+        public List<Content> TGetListContentByHeading(int id)
+        {
+            return _contentDal.GetListContentByHeading(id);
+        }
+
         public void TInsert(Content entity)
         {
             _contentDal.Insert(entity);

@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Abstract;
+using DataAccessLayer.Context;
 using DataAccessLayer.Repository;
 using EntityLayer.Concreate;
 using System;
@@ -11,5 +12,11 @@ namespace DataAccessLayer.EntityFramawork
 {
     public class EFContentDal : GenericRepository<Content>, IContentDal
     {
+        MvcKampContext c = new MvcKampContext();
+        public List<Content> GetListContentByHeading(int id)
+        {
+            var values = c.Contents.Where(x => x.HeadingID == id).ToList();
+            return values;
+        }
     }
 }

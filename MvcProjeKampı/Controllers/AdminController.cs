@@ -19,11 +19,13 @@ namespace MvcProjeKampı.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IWriterService _writerService;
         private readonly IHeadingService _headingService;
+        private readonly IContentService _contentService;
         public AdminController()
         {
             _categoryService = new CategoryManager(new EFCategoryDal(), new CategoryValitadions());
             _writerService = new WriterManager(new EFWriterDal(), new WriterValitadion());
             _headingService = new HeadingManager(new EFHeadingDal(), new HeadingValidation());
+            _contentService = new ContentManager(new EFContentDal());
         }
         #endregion
 
@@ -221,8 +223,23 @@ namespace MvcProjeKampı.Controllers
         [HttpGet]
         public ActionResult HeadingEdit(int id)
         {
+            #region CategoryListForDropDown
+            List<SelectListItem> selectListItemsCategory = new List<SelectListItem>();
+            var categories = _categoryService.TListCategorytoIDandNameforWriterTable();
+
+            foreach (var item in categories)
+            {
+                selectListItemsCategory.Add(new SelectListItem
+                {
+                    Value = item.CategoryID.ToString(),
+                    Text = item.CategoryName
+                });
+            }
+            ViewBag.Categories = selectListItemsCategory;
+            #endregion
+
             var getHeading = _headingService.TGetID(id);
-            return RedirectToAction("HeadingEdit", getHeading);
+            return View("HeadingEdit", getHeading);
         }
 
         [HttpPost]
@@ -236,6 +253,26 @@ namespace MvcProjeKampı.Controllers
             updatedheading.HeadingStatus = h.HeadingStatus;
             _headingService.TUpdate(updatedheading);
             return RedirectToAction("Heading");
+        }
+        #endregion
+
+        #region ContentOperations
+        public ActionResult ContentByHeading(int id)
+        {
+            var headingdata = _headingService.TGetID(id);
+            string headingTitle = headingdata.HeadingName;
+
+            var ContentByHeading = _contentService.TGetListContentByHeading(id);
+            if (ContentByHeading.Count != 0)
+            {
+                return View(ContentByHeading);
+            }
+            else
+            {
+                TempData["ValidationErrors"] = $"{headingTitle} başlığına ait bir içerik bulunamamıştır";
+                TempData["RedirectToAction"] = "Writer";
+                return View("ErrorPages");
+            }
         }
         #endregion
     }
