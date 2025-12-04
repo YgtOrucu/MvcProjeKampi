@@ -1,0 +1,146 @@
+﻿@using EntityLayer.Concreate
+@model List<About>
+@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    /* Modal arka plan blur efekti */
+    .modal.fade .modal-dialog {
+        transition: transform .3s ease-out;
+    }
+
+    .modal-backdrop.show {
+        backdrop-filter: blur(4px);
+    }
+
+    /* Modal kutusu */
+    .modal-content {
+        border-radius: 18px !important;
+        border: none;
+        background: #ffffff;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+    }
+
+    /* Başlık */
+    .modal-title {
+        font-weight: 600;
+        color: #333;
+    }
+    /* Button */
+    .btn-primary {
+        background: #7b57ff;
+        border: none;
+        border-radius: 10px;
+        padding: 6px 14px;
+        transition: all .2s ease;
+        margin: 10px 0;
+    }
+
+        .btn-primary:hover {
+            background: #6a46f7;
+            transform: translateY(-1px);
+        }
+</style>
+
+<div class="table-card">
+    <div class="title">About List</div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Details1</th>
+                    <th>Details2</th>
+                    <th>Image1</th>
+                    <th>Image2</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.AboutID</td>
+                        <td>@item.AboutDetails1</td>
+                        <td>@item.AboutDetails2</td>
+                        <td>@item.AboutImage1</td>
+                        <td>@item.AboutImage2</td>
+                        <td>
+                            @if ((bool)item.AboutStatus)
+                            {
+                                <span class="badge bg-success text-sm">Active</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger text-sm">Pasive</span>
+                            }
+                        </td>
+                        <td>
+                            <a href="~/Admin/AboutEdit/@item.AboutID"
+                               class="btn btn-warning btn-sm">Düzenle</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modal1">Add</button>
+    </div>
+</div>
+
+<div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modal1Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal1Label" style="margin:0 0 0 9rem">Add About</h2>
+            </div>
+
+            <form method="post" action="~/Admin/AboutAdd">
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label for="AboutDetails1" class="form-label">Details 1</label>
+                        <input type="text" name="AboutDetails1" id="AboutDetails1" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="AboutDetails2" class="form-label">Details 2</label>
+                        <input type="text" name="AboutDetails2" id="AboutDetails2" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="AboutImage1" class="form-label">Image 1</label>
+                        <input type="text" name="AboutImage1" id="AboutImage1" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="AboutImage2" class="form-label">Image 2</label>
+                        <input type="text" name="AboutImage2" id="AboutImage2" class="form-control">
+                    </div>
+
+                    <label for="AboutStatus" class="form-label">Status</label>
+                    <div class="form-check-inline">
+                        <div class="form-check">
+                            <input class="form-check-input" id="durumAktif" name="AboutStatus" type="radio" value="True">
+                            <label class="form-check-label" for="durumAktif">Active</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" id="durumPasif" name="AboutStatus" type="radio" value="False">
+                            <label class="form-check-label" for="durumPasif">Pasive</label>
+                        </div>
+                    </div>
+
+                    <br />
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-sm">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

@@ -20,12 +20,16 @@ namespace MvcProjeKampı.Controllers
         private readonly IWriterService _writerService;
         private readonly IHeadingService _headingService;
         private readonly IContentService _contentService;
+        private readonly IAboutService _aboutService;
+        private readonly IContactService _contactService;
         public AdminController()
         {
             _categoryService = new CategoryManager(new EFCategoryDal(), new CategoryValitadions());
             _writerService = new WriterManager(new EFWriterDal(), new WriterValitadion());
             _headingService = new HeadingManager(new EFHeadingDal(), new HeadingValidation());
             _contentService = new ContentManager(new EFContentDal());
+            _aboutService = new AboutManager(new EFAboutDal(), new AboutValidation());
+            _contactService = new ContactManager(new EFContactDal());
         }
         #endregion
 
@@ -273,6 +277,71 @@ namespace MvcProjeKampı.Controllers
                 TempData["RedirectToAction"] = "Writer";
                 return View("ErrorPages");
             }
+        }
+        #endregion
+
+        #region AboutOperation
+        public ActionResult About()
+        {
+            var values = _aboutService.TGetList();
+            return View(values);
+        }
+        [HttpPost]
+        public ActionResult AboutAdd(About a)
+        {
+            try
+            {
+                _aboutService.TInsert(a);
+                return RedirectToAction("About");
+            }
+            catch (ValidationException ex)
+            {
+                var errormessage = string.Join("<br>", ex.Errors.Select(x => x.ErrorMessage));
+                TempData["ValidationErrors"] = errormessage;
+                TempData["RedirectToAction"] = "About";
+                return RedirectToAction("ErrorPages");
+            }
+        }
+        [HttpGet]
+        public ActionResult AboutEdit(int id)
+        {
+            var getAbout = _aboutService.TGetID(id);
+            return View("AboutEdit", getAbout);
+        }
+        [HttpPost]
+        public ActionResult AboutUpdate(About a)
+        {
+            try
+            {
+                var updatedAbout = _aboutService.TGetID(a.AboutID);
+                updatedAbout.AboutDetails1 = a.AboutDetails1;
+                updatedAbout.AboutDetails2 = a.AboutDetails2;
+                updatedAbout.AboutImage1 = a.AboutImage1;
+                updatedAbout.AboutImage2 = a.AboutImage2;
+                updatedAbout.AboutStatus = a.AboutStatus;
+                _aboutService.TUpdate(updatedAbout);
+                return RedirectToAction("About");
+            }
+            catch (ValidationException ex)
+            {
+                var errormessage = string.Join("<br>", ex.Errors.Select(x => x.ErrorMessage));
+                TempData["ValidationErrors"] = errormessage;
+                TempData["RedirectToAction"] = "About";
+                return RedirectToAction("ErrorPages");
+            }
+        }
+        #endregion
+
+        #region ContactandMessageOperation
+        public ActionResult ContactandMessage()
+        {
+            var values = _contactService.TGetList();
+            return View(values);
+        }
+        public ActionResult ContactandMessageDetails(int id)
+        {
+            var getmessagedetails = _contactService.TGetID(id);
+            return View(getmessagedetails);
         }
         #endregion
     }

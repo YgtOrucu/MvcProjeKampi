@@ -1,0 +1,54 @@
+﻿@model EntityLayer.Concreate.About
+@{
+    ViewBag.Title = "AboutEdit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="title">About Edit</div>
+<form action="~/Admin/AboutUpdate" method="post" class="nice-form">
+    <div class="field">
+        <label for="AboutID">About ID</label>
+        @Html.TextBoxFor(x => x.AboutID, new { @class = "input", @readonly = "readonly" })
+    </div>
+
+    <div class="field">
+        <label for="AboutDetails1">About Details1</label>
+        @Html.TextBoxFor(x => x.AboutDetails1, new { @class = "input" })
+    </div>
+
+    <div class="field">
+        <label for="AboutDetails2">About Details2</label>
+        @Html.TextBoxFor(x => x.AboutDetails2, new { @class = "input" })
+    </div>
+
+    <div class="field">
+        <label for="AboutImage1">About Image1</label>
+        @Html.TextBoxFor(x => x.AboutImage1, new { @class = "input" })
+    </div>
+
+    <div class="field">
+        <label for="AboutImage2">About Image2</label>
+        @Html.TextBoxFor(x => x.AboutImage2, new { @class = "input" })
+    </div>
+    <div class="field">
+        <label for="AboutStatus">About Status</label>
+
+        <div class="radio-group">
+            <label class="radio">
+                @Html.RadioButtonFor(x => x.AboutStatus, true)
+                <span>Active</span>
+            </label>
+
+            <label class="radio">
+                @Html.RadioButtonFor(x => x.AboutStatus, false)
+                <span>Pasive</span>
+            </label>
+        </div>
+
+    </div>
+    <div class="filter">
+        <button type="submit" class="submit-btn">About Edit</button>
+        <a href="~/Admin/About" class="btn-danger">Return About Page</a>
+    </div>
+</form>
+

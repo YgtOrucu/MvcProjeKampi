@@ -2301,6 +2301,10 @@
     <Content Include="Views\Admin\HeadingEdit.cshtml" />
     <Content Include="Views\Admin\WritersHeading.cshtml" />
     <Content Include="Views\Admin\ContentByHeading.cshtml" />
+    <Content Include="Views\Admin\About.cshtml" />
+    <Content Include="Views\Admin\AboutEdit.cshtml" />
+    <Content Include="Views\Admin\ContactandMessage.cshtml" />
+    <Content Include="Views\Admin\ContactandMessageDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

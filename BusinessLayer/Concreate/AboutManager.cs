@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.Valitadions;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concreate;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +15,13 @@ namespace BusinessLayer.Concreate
     public class AboutManager : IAboutService
     {
         private readonly IAboutDal _aboutDal;
+        private readonly AboutValidation _validationRulesAbout;
 
 
-        public AboutManager(IAboutDal aboutDal)
+        public AboutManager(IAboutDal aboutDal, AboutValidation validationRulesAbout)
         {
             _aboutDal = aboutDal;
+            _validationRulesAbout = validationRulesAbout;
         }
 
         public void TDelete(About entity)
@@ -37,6 +41,13 @@ namespace BusinessLayer.Concreate
 
         public void TInsert(About entity)
         {
+            About about = new About()
+            {
+                AboutDetails1 = entity.AboutDetails1,
+                AboutDetails2 = entity.AboutDetails2
+            };
+            var result = _validationRulesAbout.Validate(about);
+            if (!result.IsValid) throw new ValidationException(result.Errors);
             _aboutDal.Insert(entity);
         }
 
@@ -47,6 +58,13 @@ namespace BusinessLayer.Concreate
 
         public void TUpdate(About entity)
         {
+            About about = new About()
+            {
+                AboutDetails1 = entity.AboutDetails1,
+                AboutDetails2 = entity.AboutDetails2
+            };
+            var result = _validationRulesAbout.Validate(about);
+            if (!result.IsValid) throw new ValidationException(result.Errors);
             _aboutDal.Update(entity);
         }
     }
