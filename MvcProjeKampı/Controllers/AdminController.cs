@@ -22,6 +22,7 @@ namespace MvcProjeKampı.Controllers
         private readonly IContentService _contentService;
         private readonly IAboutService _aboutService;
         private readonly IContactService _contactService;
+        private readonly IMessageService _messageService;
         public AdminController()
         {
             _categoryService = new CategoryManager(new EFCategoryDal(), new CategoryValitadions());
@@ -30,6 +31,7 @@ namespace MvcProjeKampı.Controllers
             _contentService = new ContentManager(new EFContentDal());
             _aboutService = new AboutManager(new EFAboutDal(), new AboutValidation());
             _contactService = new ContactManager(new EFContactDal());
+            _messageService = new MessageManager(new EFMessageDal());
         }
         #endregion
 
@@ -333,15 +335,34 @@ namespace MvcProjeKampı.Controllers
         #endregion
 
         #region ContactandMessageOperation
+
+        public void InboxAndSentForAdminMessageCount()
+        {
+            int getInboxMessageCount = _messageService.TTotalNumberOfInbox();
+            int getSendMessageCount = _messageService.TTotalNumberOfSent();
+            ViewBag.ınboxcount = getInboxMessageCount;
+            ViewBag.sentcount = getSendMessageCount;
+        }
+
         public ActionResult ContactandMessage()
         {
-            var values = _contactService.TGetList();
-            return View(values);
+            var Inboxlist = _messageService.TListInboxForAdminUser();
+            return View(Inboxlist);
+        }
+        public ActionResult SendBoxForAdmin()
+        {
+            var Sendlist = _messageService.TListSenderForAdminUser();
+            return View(Sendlist);
         }
         public ActionResult ContactandMessageDetails(int id)
         {
-            var getmessagedetails = _contactService.TGetID(id);
+            var getmessagedetails = _messageService.TGetID(id);
             return View(getmessagedetails);
+        }
+        public PartialViewResult LeftBarArea()
+        {
+            InboxAndSentForAdminMessageCount();
+            return PartialView();
         }
         #endregion
     }

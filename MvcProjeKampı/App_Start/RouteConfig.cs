@@ -16,7 +16,7 @@ namespace MvcProjeKampı
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Admin", action = "About", id = UrlParameter.Optional }
             );
         }
     }

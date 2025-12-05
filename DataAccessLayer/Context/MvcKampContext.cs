@@ -18,6 +18,7 @@ namespace DataAccessLayer.Context
         public DbSet<Content> Contents { get; set; }
         public DbSet<Heading> Headings { get; set; }
         public DbSet<Writer> Writers { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -37,6 +38,7 @@ namespace DataAccessLayer.Context
             modelBuilder.Entity<Contact>().Property(x => x.UserMail).HasColumnType("varchar").HasMaxLength(50);
             modelBuilder.Entity<Contact>().Property(x => x.Subject).HasColumnType("varchar").HasMaxLength(50);
             modelBuilder.Entity<Contact>().Property(x => x.Message).HasColumnType("varchar").HasMaxLength(1000);
+            modelBuilder.Entity<Contact>().Property(x => x.ContactDate).HasColumnType("date");
             #endregion
 
             #region Content
@@ -62,6 +64,16 @@ namespace DataAccessLayer.Context
             modelBuilder.Entity<Writer>().Property(x => x.WriterAbout).HasColumnType("varchar").HasMaxLength(100);
             modelBuilder.Entity<Writer>().Property(x => x.WriterMail).HasColumnType("varchar").HasMaxLength(50);
             modelBuilder.Entity<Writer>().Property(x => x.WriterPassword).HasColumnType("varchar").HasMaxLength(200);
+            #endregion
+
+            #region Message
+            modelBuilder.Entity<Message>().HasKey(x => x.MessageID);
+            modelBuilder.Entity<Message>().Property(x => x.MessageID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<Message>().Property(x => x.SenderMail).HasColumnType("varchar").HasMaxLength(50);
+            modelBuilder.Entity<Message>().Property(x => x.ReceiverMail).HasColumnType("varchar").HasMaxLength(50);
+            modelBuilder.Entity<Message>().Property(x => x.MessageSubject).HasColumnType("varchar").HasMaxLength(100);
+            modelBuilder.Entity<Message>().Property(x => x.MessageContent).HasColumnType("varchar").HasMaxLength(100);
+            modelBuilder.Entity<Message>().Property(x => x.MessageDate).HasColumnType("date");
             #endregion
         }
     }

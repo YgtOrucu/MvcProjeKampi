@@ -57,6 +57,7 @@
     <Compile Include="Abstract\IContentDal.cs" />
     <Compile Include="Abstract\IGenericDal.cs" />
     <Compile Include="Abstract\IHeadingDal.cs" />
+    <Compile Include="Abstract\IMessageDal.cs" />
     <Compile Include="Abstract\IWriterDal.cs" />
     <Compile Include="Configurations\AboutConfig.cs" />
     <Compile Include="Context\MvcKampContext.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="EntityFramawork\EFContactDal.cs" />
     <Compile Include="EntityFramawork\EFContentDal.cs" />
     <Compile Include="EntityFramawork\EFHeadingDal.cs" />
+    <Compile Include="EntityFramawork\EFMessageDal.cs" />
     <Compile Include="EntityFramawork\EFWriterDal.cs" />
     <Compile Include="Migrations\202511281733462_InitiaCreate.cs" />
     <Compile Include="Migrations\202511281733462_InitiaCreate.Designer.cs">
@@ -81,6 +83,10 @@
     <Compile Include="Migrations\202512021817487_UpdateWriterImageToWriterTable.cs" />
     <Compile Include="Migrations\202512021817487_UpdateWriterImageToWriterTable.Designer.cs">
       <DependentUpon>202512021817487_UpdateWriterImageToWriterTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202512050743598_AddedMessageTableAndAddedColumnDateInContactTable.cs" />
+    <Compile Include="Migrations\202512050743598_AddedMessageTableAndAddedColumnDateInContactTable.Designer.cs">
+      <DependentUpon>202512050743598_AddedMessageTableAndAddedColumnDateInContactTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202512021817487_UpdateWriterImageToWriterTable.resx">
       <DependentUpon>202512021817487_UpdateWriterImageToWriterTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202512050743598_AddedMessageTableAndAddedColumnDateInContactTable.resx">
+      <DependentUpon>202512050743598_AddedMessageTableAndAddedColumnDateInContactTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

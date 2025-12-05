@@ -2305,6 +2305,8 @@
     <Content Include="Views\Admin\AboutEdit.cshtml" />
     <Content Include="Views\Admin\ContactandMessage.cshtml" />
     <Content Include="Views\Admin\ContactandMessageDetails.cshtml" />
+    <Content Include="Views\Admin\LeftBarArea.cshtml" />
+    <Content Include="Views\Admin\SendBoxForAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
