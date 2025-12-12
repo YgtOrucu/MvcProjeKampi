@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IAboutDal.cs" />
+    <Compile Include="Abstract\IAdminDal.cs" />
     <Compile Include="Abstract\ICategoryDal.cs" />
     <Compile Include="Abstract\IContactDal.cs" />
     <Compile Include="Abstract\IContentDal.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Configurations\AboutConfig.cs" />
     <Compile Include="Context\MvcKampContext.cs" />
     <Compile Include="EntityFramawork\EFAboutDal.cs" />
+    <Compile Include="EntityFramawork\EFAdminDal.cs" />
     <Compile Include="EntityFramawork\EFCategoryDal.cs" />
     <Compile Include="EntityFramawork\EFContactDal.cs" />
     <Compile Include="EntityFramawork\EFContentDal.cs" />
@@ -95,6 +97,14 @@
     <Compile Include="Migrations\202512121221252_ChangesColumnLenghtPathtoImagesTable.cs" />
     <Compile Include="Migrations\202512121221252_ChangesColumnLenghtPathtoImagesTable.Designer.cs">
       <DependentUpon>202512121221252_ChangesColumnLenghtPathtoImagesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202512121359475_AddedAdminAndRoleTable.cs" />
+    <Compile Include="Migrations\202512121359475_AddedAdminAndRoleTable.Designer.cs">
+      <DependentUpon>202512121359475_AddedAdminAndRoleTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202512121417560_AddedColumnAdminStatusToAdminTable.cs" />
+    <Compile Include="Migrations\202512121417560_AddedColumnAdminStatusToAdminTable.Designer.cs">
+      <DependentUpon>202512121417560_AddedColumnAdminStatusToAdminTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,6 +141,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202512121221252_ChangesColumnLenghtPathtoImagesTable.resx">
       <DependentUpon>202512121221252_ChangesColumnLenghtPathtoImagesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202512121359475_AddedAdminAndRoleTable.resx">
+      <DependentUpon>202512121359475_AddedAdminAndRoleTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202512121417560_AddedColumnAdminStatusToAdminTable.resx">
+      <DependentUpon>202512121417560_AddedColumnAdminStatusToAdminTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

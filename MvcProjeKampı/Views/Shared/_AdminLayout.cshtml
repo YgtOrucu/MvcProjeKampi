@@ -52,13 +52,20 @@ to get the desired effect
                         <img src="~/AdminThema/AdminLTE-3.0.4/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="~/Admin/Admin" class="d-block">@Session["UserName"].ToString()</a>
                     </div>
                 </div>
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                        <li class="nav-item has-treeview">
+                            <a href="~/Admin/Admin" class="nav-link" id="navLink">
+                                <i class="fas fa-info-circle"></i>
+                                <p>Admin</p>
+                            </a>
+                        </li>
 
                         <li class="nav-item has-treeview">
                             <a href="~/Admin/About" class="nav-link" id="navLink">
@@ -124,7 +131,7 @@ to get the desired effect
                         </li>
 
                         <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link" id="navLink">
+                            <a href="~/Login/LogOut" class="nav-link" id="navLink">
                                 <i class="fas fa-sign-out-alt"></i>
                                 <p>LogOut</p>
                             </a>

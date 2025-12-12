@@ -20,6 +20,8 @@ namespace DataAccessLayer.Context
         public DbSet<Writer> Writers { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<ImagesFile> ImagesFiles  { get; set; }
+        public DbSet<Admin> Admins  { get; set; }
+        public DbSet<Role> Roles  { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -82,6 +84,19 @@ namespace DataAccessLayer.Context
             modelBuilder.Entity<ImagesFile>().Property(x => x.ImagesID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             modelBuilder.Entity<ImagesFile>().Property(x => x.Name).HasColumnType("varchar").HasMaxLength(100);
             modelBuilder.Entity<ImagesFile>().Property(x => x.Path).HasColumnType("varchar").HasMaxLength(1000);
+            #endregion
+
+            #region Admin
+            modelBuilder.Entity<Admin>().HasKey(x => x.AdminID);
+            modelBuilder.Entity<Admin>().Property(x => x.AdminID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<Admin>().Property(x => x.UserName).HasColumnType("nvarchar(MAX)");
+            modelBuilder.Entity<Admin>().Property(x => x.Password).HasColumnType("nvarchar(MAX)");
+            #endregion
+
+            #region Role
+            modelBuilder.Entity<Role>().HasKey(x => x.RoleID);
+            modelBuilder.Entity<Role>().Property(x => x.RoleID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<Role>().Property(x => x.RoleType).HasColumnType("varchar").HasMaxLength(25);
             #endregion
         }
     }

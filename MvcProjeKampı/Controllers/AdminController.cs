@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.Concreate;
 using BusinessLayer.Valitadions;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.Context;
 using DataAccessLayer.EntityFramawork;
 using EntityLayer.Concreate;
@@ -17,7 +18,7 @@ namespace MvcProjeKampı.Controllers
     public class AdminController : Controller
     {
         #region ConstructorMethods
-        MvcKampContext context = new MvcKampContext();       
+        MvcKampContext context = new MvcKampContext();
         private readonly ICategoryService _categoryService;
         private readonly IWriterService _writerService;
         private readonly IHeadingService _headingService;
@@ -25,6 +26,7 @@ namespace MvcProjeKampı.Controllers
         private readonly IAboutService _aboutService;
         private readonly IContactService _contactService;
         private readonly IMessageService _messageService;
+        private readonly IAdminService _adminService;
 
         public AdminController()
         {
@@ -34,7 +36,8 @@ namespace MvcProjeKampı.Controllers
             _contentService = new ContentManager(new EFContentDal());
             _aboutService = new AboutManager(new EFAboutDal(), new AboutValidation());
             _contactService = new ContactManager(new EFContactDal());
-            _messageService = new MessageManager(new EFMessageDal(),new MessageValidation());
+            _messageService = new MessageManager(new EFMessageDal(), new MessageValidation());
+            _adminService = new AdminManager(new EFAdminDal(), new AdminValidation());
         }
         #endregion
 
@@ -425,6 +428,59 @@ namespace MvcProjeKampı.Controllers
         {
             var values = context.ImagesFiles.ToList();
             return View(values);
+        }
+        #endregion
+
+        #region AdminOperations
+        public ActionResult Admin()
+        {
+            var values = _adminService.TGetList();
+            return View(values);
+        }
+
+        [HttpPost]
+        public ActionResult AdminAdd(Admin a)
+        {
+            try
+            {
+                _adminService.TInsert(a);
+                return RedirectToAction("Admin");
+            }
+            catch (ValidationException ex)
+            {
+                var errormessage = string.Join("<br>", ex.Errors.Select(x => x.ErrorMessage));
+                TempData["ValidationErrors"] = errormessage;
+                TempData["RedirectToAction"] = "Admin";
+                return RedirectToAction("ErrorPages");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult AdminEdit(int id)
+        {
+            var getAdmin = _adminService.TGetID(id);
+            return View("AdminEdit", getAdmin);
+        }
+
+        [HttpPost]
+        public ActionResult AdminUpdate(Admin a)
+        {
+            try
+            {
+                var updatedAdmin = _adminService.TGetID(a.AdminID);
+                updatedAdmin.UserName = a.UserName;
+                updatedAdmin.Password = a.Password;
+                updatedAdmin.RoleID = a.RoleID;
+                _adminService.TUpdate(updatedAdmin);
+                return RedirectToAction("Admin");
+            }
+            catch (ValidationException ex)
+            {
+                var errormessage = string.Join("<br>", ex.Errors.Select(x => x.ErrorMessage));
+                TempData["ValidationErrors"] = errormessage;
+                TempData["RedirectToAction"] = "Admin";
+                return RedirectToAction("ErrorPages");
+            }
         }
         #endregion
     }
