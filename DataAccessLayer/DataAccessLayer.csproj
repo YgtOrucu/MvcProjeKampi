@@ -88,6 +88,14 @@
     <Compile Include="Migrations\202512050743598_AddedMessageTableAndAddedColumnDateInContactTable.Designer.cs">
       <DependentUpon>202512050743598_AddedMessageTableAndAddedColumnDateInContactTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202512121217298_AddedImagesTable.cs" />
+    <Compile Include="Migrations\202512121217298_AddedImagesTable.Designer.cs">
+      <DependentUpon>202512121217298_AddedImagesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202512121221252_ChangesColumnLenghtPathtoImagesTable.cs" />
+    <Compile Include="Migrations\202512121221252_ChangesColumnLenghtPathtoImagesTable.Designer.cs">
+      <DependentUpon>202512121221252_ChangesColumnLenghtPathtoImagesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
@@ -117,6 +125,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202512050743598_AddedMessageTableAndAddedColumnDateInContactTable.resx">
       <DependentUpon>202512050743598_AddedMessageTableAndAddedColumnDateInContactTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202512121217298_AddedImagesTable.resx">
+      <DependentUpon>202512121217298_AddedImagesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202512121221252_ChangesColumnLenghtPathtoImagesTable.resx">
+      <DependentUpon>202512121221252_ChangesColumnLenghtPathtoImagesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

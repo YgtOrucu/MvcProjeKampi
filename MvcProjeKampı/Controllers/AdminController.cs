@@ -25,6 +25,7 @@ namespace MvcProjeKampı.Controllers
         private readonly IAboutService _aboutService;
         private readonly IContactService _contactService;
         private readonly IMessageService _messageService;
+
         public AdminController()
         {
             _categoryService = new CategoryManager(new EFCategoryDal(), new CategoryValitadions());
@@ -416,6 +417,14 @@ namespace MvcProjeKampı.Controllers
                 TempData["RedirectToAction"] = "NewMessage";
                 return RedirectToAction("ErrorPages");
             }
+        }
+        #endregion
+
+        #region GalleryOperations
+        public ActionResult Gallery()
+        {
+            var values = context.ImagesFiles.ToList();
+            return View(values);
         }
         #endregion
     }

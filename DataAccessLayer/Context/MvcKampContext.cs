@@ -19,6 +19,7 @@ namespace DataAccessLayer.Context
         public DbSet<Heading> Headings { get; set; }
         public DbSet<Writer> Writers { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<ImagesFile> ImagesFiles  { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -74,6 +75,13 @@ namespace DataAccessLayer.Context
             modelBuilder.Entity<Message>().Property(x => x.MessageSubject).HasColumnType("varchar").HasMaxLength(100);
             modelBuilder.Entity<Message>().Property(x => x.MessageContent).HasColumnType("varchar").HasMaxLength(100);
             modelBuilder.Entity<Message>().Property(x => x.MessageDate).HasColumnType("date");
+            #endregion
+
+            #region ImagesFile
+            modelBuilder.Entity<ImagesFile>().HasKey(x => x.ImagesID);
+            modelBuilder.Entity<ImagesFile>().Property(x => x.ImagesID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<ImagesFile>().Property(x => x.Name).HasColumnType("varchar").HasMaxLength(100);
+            modelBuilder.Entity<ImagesFile>().Property(x => x.Path).HasColumnType("varchar").HasMaxLength(1000);
             #endregion
         }
     }

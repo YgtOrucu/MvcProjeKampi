@@ -1,0 +1,37 @@
+﻿@using EntityLayer.Concreate
+@model List<ImagesFile>
+@{
+    ViewBag.Title = "Gallery";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <div class="card-title">
+                            Gallery
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-sm-2">
+                                    <a href="@item.Path" data-toggle="lightbox" data-title="@item.Name" data-gallery="gallery">
+                                        <img style="height: 100%;width: 100%;" src="@item.Path" class="img-fluid mb-2" alt="@item.Name" />
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

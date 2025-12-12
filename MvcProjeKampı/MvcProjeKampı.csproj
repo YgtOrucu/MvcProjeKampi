@@ -138,6 +138,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -302,6 +303,9 @@
     <Content Include="AdminThema\AdminLTE-3.0.4\docs\_layouts\home.html" />
     <Content Include="AdminThema\AdminLTE-3.0.4\docs\_layouts\page.html" />
     <Content Include="AdminThema\AdminLTE-3.0.4\docs\_layouts\post.html" />
+    <Content Include="AdminThema\AdminLTE-3.0.4\Images\amsterdam.jpg" />
+    <Content Include="AdminThema\AdminLTE-3.0.4\Images\berlin.jpg" />
+    <Content Include="AdminThema\AdminLTE-3.0.4\Images\Londra.jpg" />
     <Content Include="AdminThema\AdminLTE-3.0.4\index.html" />
     <Content Include="AdminThema\AdminLTE-3.0.4\index2.html" />
     <Content Include="AdminThema\AdminLTE-3.0.4\index3.html" />
@@ -1979,6 +1983,10 @@
     <Content Include="AdminThema\AdminLTE-3.0.4\plugins\toastr\toastr.min.css" />
     <Content Include="AdminThema\AdminLTE-3.0.4\plugins\toastr\toastr.min.js" />
     <Content Include="AdminThema\AdminLTE-3.0.4\starter.html" />
+    <Content Include="AdminThema\colorlib-error-404-10\css\style.css" />
+    <Content Include="AdminThema\colorlib-error-404-10\img\bg.jpg" />
+    <Content Include="AdminThema\colorlib-error-404-10\index.html" />
+    <Content Include="AdminThema\colorlib-error-404-10\readme.txt" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -2311,6 +2319,8 @@
     <Content Include="Views\Admin\Contact.cshtml" />
     <Content Include="Views\Admin\ContactDetails.cshtml" />
     <Content Include="Views\Admin\ContactDeletedPage.cshtml" />
+    <Content Include="Views\ErrorPage\Page404.cshtml" />
+    <Content Include="Views\Admin\Gallery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

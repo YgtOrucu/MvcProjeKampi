@@ -21,6 +21,10 @@
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/AdminThema/AdminLTE-3.0.4/dist/css/adminlte.min.css">
+    <!-- Ekko Lightbox -->
+    <link rel="stylesheet" href="~/AdminThema/AdminLTE-3.0.4/plugins/ekko-lightbox/ekko-lightbox.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Admin Table style -->
     <link rel="stylesheet" href="~/AdminThema/AdminLTE-3.0.4/dist/css/adminTable.css">
     <!-- Google Font: Source Sans Pro -->
@@ -106,7 +110,7 @@ to get the desired effect
                         </li>
 
                         <li class="nav-item has-treeview">
-                            <a href="pages/gallery.html" class="nav-link" id="navLink">
+                            <a href="~/Admin/Gallery" class="nav-link" id="navLink">
                                 <i class="fas fa-images"></i>
                                 <p>Gallery</p>
                             </a>
@@ -154,30 +158,10 @@ to get the desired effect
                         </li>
 
                         <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link" id="navLink">
+                            <a href="~/ErrorPage/Page404" class="nav-link" id="navLink">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                <p>Error Pages <i class="fas fa-angle-left right"></i></p>
+                                <p>Error Pages</p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/charts/chartjs.html" class="nav-link" id="navLink">
-                                        <i class="fas fa-chart-pie"></i>
-                                        <p>Pie Chart</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/charts/flot.html" class="nav-link" id="navLink">
-                                        <i class="fas fa-chart-bar"></i>
-                                        <p>Column Chart</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/charts/inline.html" class="nav-link" id="navLink">
-                                        <i class="fas fa-chart-line"></i>
-                                        <p>Line Chart</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
 
 
@@ -210,6 +194,30 @@ to get the desired effect
             $('#compose-textarea').summernote()
         })
     </script>
+    <!-- jQuery UI -->
+    <script src="~/AdminThema/AdminLTE-3.0.4/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- Ekko Lightbox -->
+    <script src="~/AdminThema/AdminLTE-3.0.4/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/AdminThema/AdminLTE-3.0.4/dist/js/adminlte.min.js"></script>
+    <!-- Filterizr-->
+    <script src="~/AdminThema/AdminLTE-3.0.4/plugins/filterizr/jquery.filterizr.min.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function () {
+            $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
+            });
+
+            $('.filter-container').filterizr({ gutterPixels: 3 });
+            $('.btn[data-filter]').on('click', function () {
+                $('.btn[data-filter]').removeClass('active');
+                $(this).addClass('active');
+            });
+        })</script>
     <!-- Bootstrap -->
     <script src="~/AdminThema/AdminLTE-3.0.4/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE -->
