@@ -340,10 +340,23 @@ namespace MvcProjeKampı.Controllers
         {
             int getInboxMessageCount = _messageService.TTotalNumberOfInbox();
             int getSendMessageCount = _messageService.TTotalNumberOfSent();
+            int getUserMessageCount = _contactService.TTotalNumberOfUserMessage();
             ViewBag.ınboxcount = getInboxMessageCount;
             ViewBag.sentcount = getSendMessageCount;
+            ViewBag.UserMessageCount = getUserMessageCount;
         }
 
+        public ActionResult Contact()
+        {
+            var Contact = _contactService.TGetList();
+            return View(Contact);
+        }
+
+        public ActionResult ContactDetails(int id)
+        {
+            var getcontactdetails = _contactService.TGetID(id);
+            return View(getcontactdetails);
+        }
         public ActionResult ContactandMessage()
         {
             var Inboxlist = _messageService.TListInboxForAdminUser();
@@ -363,6 +376,29 @@ namespace MvcProjeKampı.Controllers
         {
             InboxAndSentForAdminMessageCount();
             return PartialView();
+        }
+
+        [HttpGet]
+        public ActionResult NewMessage()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult NewMessage(Message m)
+        {
+            try
+            {
+                _messageService.TInsert(m);
+                return RedirectToAction("SendBoxForAdmin");
+
+            }
+            catch (ValidationException ex)
+            {
+                var errormessage = string.Join("<br>", ex.Errors.Select(x => x.ErrorMessage));
+                TempData["ValidationErrors"] = errormessage;
+                TempData["RedirectToAction"] = "SendBoxForAdmin";
+                return RedirectToAction("ErrorPages");
+            }
         }
         #endregion
     }

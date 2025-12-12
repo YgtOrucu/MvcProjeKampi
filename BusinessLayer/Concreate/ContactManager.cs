@@ -42,6 +42,11 @@ namespace BusinessLayer.Concreate
             return _contactDal.ListToFilter(filter);
         }
 
+        public int TTotalNumberOfUserMessage()
+        {
+            return _contactDal.TotalNumberOfUserMessage();
+        }
+
         public void TUpdate(Contact entity)
         {
             _contactDal.Update(entity);
