@@ -79,6 +79,7 @@
     <Compile Include="Valitadions\AboutValidation.cs" />
     <Compile Include="Valitadions\CategoryValitadions.cs" />
     <Compile Include="Valitadions\HeadingValidation.cs" />
+    <Compile Include="Valitadions\MessageValidation.cs" />
     <Compile Include="Valitadions\WriterValitadion.cs" />
   </ItemGroup>
   <ItemGroup>

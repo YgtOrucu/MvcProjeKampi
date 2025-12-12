@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.Concreate;
 using BusinessLayer.Valitadions;
+using DataAccessLayer.Context;
 using DataAccessLayer.EntityFramawork;
 using EntityLayer.Concreate;
 using FluentValidation;
@@ -16,6 +17,7 @@ namespace MvcProjeKampı.Controllers
     public class AdminController : Controller
     {
         #region ConstructorMethods
+        MvcKampContext context = new MvcKampContext();       
         private readonly ICategoryService _categoryService;
         private readonly IWriterService _writerService;
         private readonly IHeadingService _headingService;
@@ -31,7 +33,7 @@ namespace MvcProjeKampı.Controllers
             _contentService = new ContentManager(new EFContentDal());
             _aboutService = new AboutManager(new EFAboutDal(), new AboutValidation());
             _contactService = new ContactManager(new EFContactDal());
-            _messageService = new MessageManager(new EFMessageDal());
+            _messageService = new MessageManager(new EFMessageDal(),new MessageValidation());
         }
         #endregion
 
@@ -348,8 +350,21 @@ namespace MvcProjeKampı.Controllers
 
         public ActionResult Contact()
         {
-            var Contact = _contactService.TGetList();
+            var Contact = _contactService.TGetListToStatus();
             return View(Contact);
+        }
+        public ActionResult ContactDelete(int id)
+        {
+            var getdeletedvalue = _contactService.TGetID(id);
+            getdeletedvalue.ContactStatus = false;
+            getdeletedvalue.ContactDate = DateTime.Now;
+            _contactService.TUpdate(getdeletedvalue);
+            return RedirectToAction("Contact");
+        }
+        public ActionResult ContactDeletedPage()
+        {
+            var values = context.Contacts.Where(x => x.ContactStatus == false).ToList();
+            return View(values);
         }
 
         public ActionResult ContactDetails(int id)
@@ -388,6 +403,8 @@ namespace MvcProjeKampı.Controllers
         {
             try
             {
+                m.SenderMail = "admin@gmail.com";
+                m.MessageDate = DateTime.Now;
                 _messageService.TInsert(m);
                 return RedirectToAction("SendBoxForAdmin");
 
@@ -396,7 +413,7 @@ namespace MvcProjeKampı.Controllers
             {
                 var errormessage = string.Join("<br>", ex.Errors.Select(x => x.ErrorMessage));
                 TempData["ValidationErrors"] = errormessage;
-                TempData["RedirectToAction"] = "SendBoxForAdmin";
+                TempData["RedirectToAction"] = "NewMessage";
                 return RedirectToAction("ErrorPages");
             }
         }

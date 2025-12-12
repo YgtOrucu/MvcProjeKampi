@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.Valitadions;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concreate;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +15,12 @@ namespace BusinessLayer.Concreate
     public class MessageManager : IMessageService
     {
         public readonly IMessageDal _messageDal;
+        public readonly MessageValidation _validationRulesMessage;
 
-        public MessageManager(IMessageDal messageDal)
+        public MessageManager(IMessageDal messageDal, MessageValidation validationRulesMessage)
         {
             _messageDal = messageDal;
+            _validationRulesMessage = validationRulesMessage;
         }
 
         public void TDelete(Message entity)
@@ -45,6 +49,8 @@ namespace BusinessLayer.Concreate
 
         public void TInsert(Message entity)
         {
+            var result = _validationRulesMessage.Validate(entity);
+            if (!result.IsValid) throw new ValidationException(result.Errors);
             _messageDal.Insert(entity);
         }
 

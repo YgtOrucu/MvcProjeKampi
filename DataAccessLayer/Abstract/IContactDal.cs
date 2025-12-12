@@ -10,5 +10,6 @@ namespace DataAccessLayer.Abstract
     public interface IContactDal : IGenericDal<Contact>
     {
         int TotalNumberOfUserMessage();
+        List<Contact> GetListToStatus();
     }
 }

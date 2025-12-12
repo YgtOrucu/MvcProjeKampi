@@ -2310,6 +2310,7 @@
     <Content Include="Views\Admin\NewMessage.cshtml" />
     <Content Include="Views\Admin\Contact.cshtml" />
     <Content Include="Views\Admin\ContactDetails.cshtml" />
+    <Content Include="Views\Admin\ContactDeletedPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

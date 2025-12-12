@@ -10,5 +10,6 @@ namespace BusinessLayer.Abstract
     public interface IContactService : IGenericService<Contact>
     {
         int TTotalNumberOfUserMessage();
+        List<Contact> TGetListToStatus();
     }
 }

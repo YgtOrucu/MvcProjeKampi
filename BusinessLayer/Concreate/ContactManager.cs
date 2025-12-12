@@ -32,6 +32,11 @@ namespace BusinessLayer.Concreate
             return _contactDal.GetList();
         }
 
+        public List<Contact> TGetListToStatus()
+        {
+            return _contactDal.GetListToStatus();
+        }
+
         public void TInsert(Contact entity)
         {
             _contactDal.Insert(entity);
