@@ -145,6 +145,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role\AdminRoleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminThema\AdminLTE-3.0.4\build\config\postcss.config.js" />
@@ -2438,6 +2439,7 @@
     <Content Include="Views\Admin\Admin.cshtml" />
     <Content Include="Views\Admin\AdminEdit.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\ErrorPage\AuthorizationErrorPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

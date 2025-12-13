@@ -21,5 +21,9 @@ namespace MvcProjeKampı.Controllers
             Response.TrySkipIisCustomErrors = true;
             return View();
         }
+        public ActionResult AuthorizationErrorPage()
+        {
+            return View();
+        }
     }
 }

@@ -432,8 +432,10 @@ namespace MvcProjeKampı.Controllers
         #endregion
 
         #region AdminOperations
+        
         public ActionResult Admin()
         {
+            if(User.IsInRole("Admin Yardımcısı")) { return RedirectToAction("AuthorizationErrorPage", "ErrorPage"); }
             var values = _adminService.TGetList();
             return View(values);
         }
