@@ -19,8 +19,7 @@ namespace BusinessLayer.Valitadions
             Matches("^[a-zA-ZçÇğĞıİöÖşŞüÜ ]+$").WithMessage("Başlık sadece harflerden oluşmalıdır !!!");
 
             RuleFor(x => x.HeadingDate).NotEmpty().WithMessage("Tarih boş bırakılamaz.").
-            Must(d => d.Day > 0 && d.Month > 0 && d.Year > 0).WithMessage("Gün, ay ve yıl eksiksiz girilmelidir.").
-            Must(d => d <= DateTime.Today).WithMessage("Tarih bugünden büyük olamaz.");
+            Must(d => d.Day > 0 && d.Month > 0 && d.Year > 0).WithMessage("Gün, ay ve yıl eksiksiz girilmelidir.");
         }
     }
 }

@@ -1,0 +1,87 @@
+﻿@using EntityLayer.Concreate
+@model List<Heading>
+
+@{
+    ViewBag.Title = "WriterHeadings";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+<style>
+    /* Modal arka plan blur efekti */
+    .modal.fade .modal-dialog {
+        transition: transform .3s ease-out;
+    }
+
+    .modal-backdrop.show {
+        backdrop-filter: blur(4px);
+    }
+
+    /* Modal kutusu */
+    .modal-content {
+        border-radius: 18px !important;
+        border: none;
+        background: #ffffff;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+    }
+
+    /* Başlık */
+    .modal-title {
+        font-weight: 600;
+        color: #333;
+    }
+    /* Button */
+    .btn-primary {
+        background: #7b57ff;
+        border: none;
+        border-radius: 10px;
+        padding: 6px 14px;
+        transition: all .2s ease;
+        margin: 10px 0;
+    }
+
+        .btn-primary:hover {
+            background: #6a46f7;
+            transform: translateY(-1px);
+        }
+</style>
+
+<div class="table-card">
+    <div class="title">Heading List</div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Writer</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="font-weight:bold">@item.HeadingID</td>
+                        <td>@item.HeadingName</td>
+                        <td>@item.HeadingDate.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Category.CategoryName</td>
+                        <td>@item.Writer.WriterName @item.Writer.WriterSurname</td>
+                        <td class="project-actions text-right">
+                        <a href="/WriterPanel/WriterHeadingEdit/@item.HeadingID" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="/WriterPanel/WriterContentByHeading/@item.HeadingID" class="btn btn-success btn-sm">Content</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a href="/WriterPanel/WriterHeadingAdd" class="add-btn">Add Heading</a>
+    </div>
+</div>
+
+
+
+
+

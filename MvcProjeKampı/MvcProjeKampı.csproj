@@ -141,6 +141,7 @@
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\WriterPanelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2440,6 +2441,18 @@
     <Content Include="Views\Admin\AdminEdit.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\ErrorPage\AuthorizationErrorPage.cshtml" />
+    <Content Include="Views\Shared\_WriterLayout.cshtml" />
+    <Content Include="Views\WriterPanel\WriterProfile.cshtml" />
+    <Content Include="Views\WriterPanel\WriterHeadings.cshtml" />
+    <Content Include="Views\WriterPanel\WriterHeadingAdd.cshtml" />
+    <Content Include="Views\WriterPanel\WriterHeadingEdit.cshtml" />
+    <Content Include="Views\WriterPanel\ErrorPages.cshtml" />
+    <Content Include="Views\WriterPanel\WriterMessageInbox.cshtml" />
+    <Content Include="Views\WriterPanel\LeftBarArea.cshtml" />
+    <Content Include="Views\WriterPanel\WriterMessageSend.cshtml" />
+    <Content Include="Views\WriterPanel\WriterMessagDetails.cshtml" />
+    <Content Include="Views\WriterPanel\NewMessage.cshtml" />
+    <Content Include="Views\WriterPanel\WriterContentByHeading.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

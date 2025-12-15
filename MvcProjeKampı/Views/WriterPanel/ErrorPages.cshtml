@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "ErrorPages";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+    var errors = TempData["ValidationErrors"] as string;
+    var RedirectToAction = TempData["RedirectToAction"] as string;
+}
+
+<div class="error-card">
+    <h4 class="error-title">Error</h4>
+
+    <div class="error-box">
+        @Html.Raw(errors)
+    </div>
+
+    <a href="@Url.Action(RedirectToAction)" class="return-btn">Return</a>
+</div>

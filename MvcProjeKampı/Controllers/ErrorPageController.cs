@@ -9,6 +9,7 @@ namespace MvcProjeKampı.Controllers
     public class ErrorPageController : Controller
     {
         // GET: ErrorPage
+ 
         public ActionResult Page403()
         {
             Response.StatusCode = 403;

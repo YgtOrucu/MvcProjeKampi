@@ -41,7 +41,7 @@ namespace MvcProjeKampı.Controllers
         }
         #endregion
 
-        #region ErrorPage
+        #region ErrorPages
         public ActionResult ErrorPages()
         {
             return View();

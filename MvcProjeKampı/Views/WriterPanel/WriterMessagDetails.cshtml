@@ -1,7 +1,7 @@
 ﻿@model EntityLayer.Concreate.Message
 @{
-    ViewBag.Title = "ContactandMessageDetails";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "WriterMessagDetails";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -13,13 +13,13 @@
                 <div class="col-md-3">
                     @if (Model.ReceiverMail == "admin@gmail.com")
                     {
-                        <a href="~/Admin/SendBoxForAdmin" class="btn btn-primary btn-block mb-3">Back to Sent</a>
+                        <a href="~/WriterPanel/WriterMessageSend" class="btn btn-primary btn-block mb-3">Back to Sent</a>
                     }
                     else
                     {
-                        <a href="~/Admin/ContactandMessage" class="btn btn-primary btn-block mb-3">Back to Inbox</a>
+                        <a href="~/WriterPanel/WriterMessageInbox" class="btn btn-primary btn-block mb-3">Back to Inbox</a>
                     }
-                    @Html.Action("LeftBarArea", "Admin")
+                    @Html.Action("LeftBarArea", "WriterPanel")
                 </div>
                 <div class="col-md-9">
                     <div class="card card-primary card-outline">
@@ -48,3 +48,5 @@
     </section>
 </body>
 </html>
+
+

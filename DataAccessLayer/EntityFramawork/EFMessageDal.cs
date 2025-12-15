@@ -15,13 +15,13 @@ namespace DataAccessLayer.EntityFramawork
         MvcKampContext c = new MvcKampContext();
         public List<Message> ListInboxForAdminUser()
         {
-            var values = c.Messages.Where(x => x.ReceiverMail == "admin@gmail.com").ToList();
+            var values = c.Messages.Where(x => x.ReceiverMail == "gizem@gmail.com").ToList();
             return values;
         }
 
         public List<Message> ListSenderForAdminUser()
         {
-            var values = c.Messages.Where(x => x.SenderMail == "admin@gmail.com").ToList();
+            var values = c.Messages.Where(x => x.SenderMail == "gizem@gmail.com").ToList();
             return values;
         }
 
