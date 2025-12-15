@@ -16,11 +16,13 @@ namespace BusinessLayer.Concreate
     {
         private readonly IAdminDal _adminDal;
         private readonly AdminValidation _validationRulesAdmin;
+        private readonly WriterLoginValidations _validationRulesWriter;
 
-        public AdminManager(IAdminDal adminDal, AdminValidation validationRulesAdmin)
+        public AdminManager(IAdminDal adminDal, AdminValidation validationRulesAdmin, WriterLoginValidations validationRulesWriter)
         {
             _adminDal = adminDal;
             _validationRulesAdmin = validationRulesAdmin;
+            _validationRulesWriter = validationRulesWriter;
         }
         public void TDelete(Admin entity)
         {
@@ -76,6 +78,18 @@ namespace BusinessLayer.Concreate
             var result = _validationRulesAdmin.Validate(admin);
             if (!result.IsValid) throw new ValidationException(result.Errors);
             return _adminDal.GetToUserNameAndPassword(username, password);
+        }
+
+        public List<Writer> TGetToWriterMailAndPassword(string mail, string password)
+        {
+            Writer writer = new Writer()
+            {
+                WriterMail = mail,
+                WriterPassword = password
+            };
+            var result = _validationRulesWriter.Validate(writer);
+            if (!result.IsValid) throw new ValidationException(result.Errors);
+            return _adminDal.GetToWriterMailAndPassword(mail, password);
         }
     }
 }

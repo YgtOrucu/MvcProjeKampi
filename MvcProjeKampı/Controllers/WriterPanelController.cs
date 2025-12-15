@@ -23,6 +23,7 @@ namespace MvcProjeKampı.Controllers
         private readonly IMessageService _messageService;
         private readonly IContentService _contentService;
 
+
         public WriterPanelController()
         {
             _headingService = new HeadingManager(new EFHeadingDal(), new HeadingValidation());
@@ -42,10 +43,11 @@ namespace MvcProjeKampı.Controllers
         {
             return View();
         }
+
         #region WriterHeadingOperations
         public ActionResult WriterHeadings()
         {
-            int id = 1; //Sesion'dan yazarın ıdsını çekicez login de giriş olduğu zaman 
+            int id = Convert.ToInt32(Session["WriterID"]);
             var values = _headingService.TGetListByWriter(id);
             return View(values);
         }
@@ -77,7 +79,7 @@ namespace MvcProjeKampı.Controllers
             {
                 h.HeadingStatus = true;
                 h.HeadingDate = DateTime.Now;
-                h.WriterID = 1; //Sesion'dan yazarın ıdsını çekicez login de giriş olduğu zaman
+                h.WriterID = Convert.ToInt32(Session["WriterID"]);
                 _headingService.TInsert(h);
                 return RedirectToAction("WriterHeadings");
             }
@@ -117,20 +119,33 @@ namespace MvcProjeKampı.Controllers
 
         #region WriterMessageOperations
 
+        public void InboxAndSentForWriterMessageCount()
+        {
+            string mail = Session["WriterMail"].ToString();
+            int getInboxMessageCount = _messageService.TTotalNumberOfWriterInbox(mail);
+            int getSendMessageCount = _messageService.TTotalNumberOfWriterSent(mail);
+            ViewBag.ınboxcount = getInboxMessageCount;
+            ViewBag.sentcount = getSendMessageCount;
+        }
+
+
         public PartialViewResult LeftBarArea()
         {
+            InboxAndSentForWriterMessageCount();
             return PartialView();
         }
 
         public ActionResult WriterMessageInbox()
         {
-            var Inboxlist = _messageService.TListInboxForAdminUser();
+            string mail = Session["WriterMail"].ToString();
+            var Inboxlist = _messageService.TListInboxForWriterUser(mail);
             return View(Inboxlist);
         }
 
         public ActionResult WriterMessageSend()
         {
-            var Sendlist = _messageService.TListSenderForAdminUser();
+            string mail = Session["WriterMail"].ToString();
+            var Sendlist = _messageService.TListSenderForWriterUser(mail);
             return View(Sendlist);
         }
 
@@ -150,7 +165,7 @@ namespace MvcProjeKampı.Controllers
         {
             try
             {
-                m.SenderMail = "gizem@gmail.com"; //Sesion'dan yazarın ıdsını çekicez login de giriş olduğu zaman 
+                m.SenderMail = Session["WriterMail"].ToString();
                 m.MessageDate = DateTime.Now;
                 _messageService.TInsert(m);
                 return RedirectToAction("WriterMessageSend");

@@ -10,5 +10,6 @@ namespace DataAccessLayer.Abstract
     public interface IAdminDal : IGenericDal<Admin>
     {
         List<Admin> GetToUserNameAndPassword(string username, string password);
+        List<Writer> GetToWriterMailAndPassword(string mail, string password);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.Concreate;
 using BusinessLayer.Valitadions;
+using DataAccessLayer.Context;
 using DataAccessLayer.EntityFramawork;
 using EntityLayer.Concreate;
 using FluentValidation;
@@ -17,7 +18,7 @@ namespace MvcProjeKampı.Controllers
         private readonly IAdminService _adminService;
         public LoginController()
         {
-            _adminService = new AdminManager(new EFAdminDal(), new AdminValidation());
+            _adminService = new AdminManager(new EFAdminDal(), new AdminValidation(),new WriterLoginValidations());
         }
         // GET: Login
         public ActionResult Login()
@@ -32,8 +33,8 @@ namespace MvcProjeKampı.Controllers
                 var result = _adminService.TGetToUserNameAndPassword(admin.UserName, admin.Password);
                 if (result.Count != 0)
                 {
-                    FormsAuthentication.SetAuthCookie(admin.UserName, false);
-                    Session["UserName"] = admin.UserName;
+                    FormsAuthentication.SetAuthCookie(result[0].UserName, false);
+                    Session["UserName"] = result[0].UserName;
                     return RedirectToAction("Admin", "Admin");
                 }
                 else
@@ -63,6 +64,53 @@ namespace MvcProjeKampı.Controllers
             FormsAuthentication.SignOut();
             Session.Abandon();
             return RedirectToAction("Login", "Login");
+        }
+
+        public ActionResult LoginForWriter()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult LoginForWriter(Writer w)
+        {
+            try
+            {
+                var result = _adminService.TGetToWriterMailAndPassword(w.WriterMail, w.WriterPassword);
+                if (result.Count != 0)
+                {
+                    FormsAuthentication.SetAuthCookie(result[0].WriterMail, false);
+                    Session["WriterMail"] = result[0].WriterMail;
+                    Session["WriterID"] = result[0].WriterID.ToString();
+                    Session["UserName"] = result[0].WriterName + " " + result[0].WriterSurname;
+                    return RedirectToAction("WriterProfile", "WriterPanel");
+                }
+                else
+                {
+                    throw new ValidationException("Kullanıcı adı veya şifre hatalı!");
+                }
+            }
+            catch (ValidationException ex)
+            {
+                if (ex.Errors.Count() != 0)
+                {
+                    foreach (var error in ex.Errors)
+                    {
+                        ModelState.AddModelError("", error.ErrorMessage);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                return View("LoginForWriter");
+            }
+        }
+
+        public ActionResult LogOutForWriter()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return RedirectToAction("LoginForWriter", "Login");
         }
     }
 }

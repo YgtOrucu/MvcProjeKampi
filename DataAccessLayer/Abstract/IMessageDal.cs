@@ -13,5 +13,10 @@ namespace DataAccessLayer.Abstract
         List<Message> ListSenderForAdminUser();
         int TotalNumberOfInbox();
         int TotalNumberOfSent();
+
+        List<Message> ListInboxForWriterUser(string mail);
+        List<Message> ListSenderForWriterUser(string mail);
+        int TotalNumberOfWriterInbox(string mail);
+        int TotalNumberOfWriterSent(string mail);
     }
 }

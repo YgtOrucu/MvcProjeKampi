@@ -19,5 +19,11 @@ namespace DataAccessLayer.EntityFramawork
             var values = context.Admins.Where(x => x.UserName == username && x.Password == password).ToList();
             return values;
         }
+
+        public List<Writer> GetToWriterMailAndPassword(string mail, string password)
+        {
+            var values = context.Writers.Where(x => x.WriterMail == mail && x.WriterPassword == password).ToList();
+            return values;
+        }
     }
 }

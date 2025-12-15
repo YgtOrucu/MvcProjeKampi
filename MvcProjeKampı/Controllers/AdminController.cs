@@ -37,7 +37,7 @@ namespace MvcProjeKampı.Controllers
             _aboutService = new AboutManager(new EFAboutDal(), new AboutValidation());
             _contactService = new ContactManager(new EFContactDal());
             _messageService = new MessageManager(new EFMessageDal(), new MessageValidation());
-            _adminService = new AdminManager(new EFAdminDal(), new AdminValidation());
+            _adminService = new AdminManager(new EFAdminDal(), new AdminValidation(),new WriterLoginValidations());
         }
         #endregion
 
@@ -473,6 +473,7 @@ namespace MvcProjeKampı.Controllers
                 updatedAdmin.UserName = a.UserName;
                 updatedAdmin.Password = a.Password;
                 updatedAdmin.RoleID = a.RoleID;
+                updatedAdmin.AdminStatus = a.AdminStatus;
                 _adminService.TUpdate(updatedAdmin);
                 return RedirectToAction("Admin");
             }

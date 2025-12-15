@@ -73,5 +73,26 @@ namespace BusinessLayer.Concreate
         {
             return _messageDal.TotalNumberOfSent();
         }
+
+        public List<Message> TListInboxForWriterUser(string mail)
+        {
+            return _messageDal.ListInboxForWriterUser(mail);
+        }
+
+        public List<Message> TListSenderForWriterUser(string mail)
+        {
+            return _messageDal.ListSenderForWriterUser(mail);                             
+        }
+
+        public int TTotalNumberOfWriterInbox(string mail)
+        {
+            return _messageDal.TotalNumberOfWriterInbox(mail);
+        }
+
+        public int TTotalNumberOfWriterSent(string mail)
+        {
+            return _messageDal.TotalNumberOfWriterSent(mail);
+
+        }
     }
 }

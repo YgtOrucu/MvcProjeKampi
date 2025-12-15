@@ -40,6 +40,7 @@ namespace BusinessLayer.Concreate
                 WriterSurname = entity.WriterSurname,
                 WriterAbout = entity.WriterAbout,
                 WriterMail = entity.WriterMail,
+                WriterPassword = entity.WriterPassword
             };
             var result = _WritervalidationRules.Validate(writer);
             if(!result.IsValid) throw new ValidationException(result.Errors);

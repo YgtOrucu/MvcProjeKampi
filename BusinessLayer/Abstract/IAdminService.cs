@@ -10,5 +10,7 @@ namespace BusinessLayer.Abstract
     public interface IAdminService : IGenericService<Admin>
     {
         List<Admin> TGetToUserNameAndPassword(string username, string password);
+        List<Writer> TGetToWriterMailAndPassword(string mail, string password);
+
     }
 }

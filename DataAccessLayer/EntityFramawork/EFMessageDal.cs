@@ -15,13 +15,13 @@ namespace DataAccessLayer.EntityFramawork
         MvcKampContext c = new MvcKampContext();
         public List<Message> ListInboxForAdminUser()
         {
-            var values = c.Messages.Where(x => x.ReceiverMail == "gizem@gmail.com").ToList();
+            var values = c.Messages.Where(x => x.ReceiverMail == "admin@gmail.com").ToList();
             return values;
         }
 
         public List<Message> ListSenderForAdminUser()
         {
-            var values = c.Messages.Where(x => x.SenderMail == "gizem@gmail.com").ToList();
+            var values = c.Messages.Where(x => x.SenderMail == "admin@gmail.com").ToList();
             return values;
         }
 
@@ -34,6 +34,29 @@ namespace DataAccessLayer.EntityFramawork
         public int TotalNumberOfSent()
         {
             int sentCount = c.Messages.Where(x => x.SenderMail == "admin@gmail.com").Count();
+            return sentCount;
+        }
+        public List<Message> ListInboxForWriterUser(string mail)
+        {
+            var values = c.Messages.Where(x => x.ReceiverMail == mail).ToList();
+            return values;
+        }
+
+        public List<Message> ListSenderForWriterUser(string mail)
+        {
+            var values = c.Messages.Where(x => x.SenderMail == mail).ToList();
+            return values;
+        }
+
+        public int TotalNumberOfWriterInbox(string mail)
+        {
+            int Inboxcount = c.Messages.Where(x => x.ReceiverMail == mail).Count();
+            return Inboxcount;
+        }
+
+        public int TotalNumberOfWriterSent(string mail)
+        {
+            int sentCount = c.Messages.Where(x => x.SenderMail == mail).Count();
             return sentCount;
         }
     }

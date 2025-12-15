@@ -14,5 +14,10 @@ namespace BusinessLayer.Abstract
         List<Message> TListSenderForAdminUser();
         int TTotalNumberOfInbox();
         int TTotalNumberOfSent();
+
+        List<Message> TListInboxForWriterUser(string mail);
+        List<Message> TListSenderForWriterUser(string mail);
+        int TTotalNumberOfWriterInbox(string mail);
+        int TTotalNumberOfWriterSent(string mail);
     }
 }
