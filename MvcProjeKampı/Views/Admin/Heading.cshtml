@@ -42,7 +42,8 @@
                 }
             </tbody>
         </table>
-        <a href="/Admin/HeadingAdd" class="add-btn">Add Heading</a>
+        @if (!User.IsInRole("Admin Yardımcısı"))
+        {<a href="/Admin/HeadingAdd" class="add-btn">Add Heading</a>}
     </div>
 </div>
 

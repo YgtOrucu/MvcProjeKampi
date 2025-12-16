@@ -38,7 +38,8 @@
                 }
             </tbody>
         </table>
-        <a href="/Admin/CategoryAdd" class="add-btn">Add Category</a>
+        @if (!User.IsInRole("Admin Yardımcısı"))
+        {<a href="/Admin/CategoryAdd" class="add-btn">Add Category</a>}
     </div>
 </div>
 

@@ -365,9 +365,9 @@ namespace MvcProjeKampı.Controllers
             var values = context.Contacts.Where(x => x.ContactStatus == false).ToList();
             return View(values);
         }
-
         public ActionResult ContactDetails(int id)
         {
+            if (User.IsInRole("Admin Yardımcısı")) { return RedirectToAction("AuthorizationErrorPage", "ErrorPage"); }
             var getcontactdetails = _contactService.TGetID(id);
             return View(getcontactdetails);
         }
@@ -383,6 +383,7 @@ namespace MvcProjeKampı.Controllers
         }
         public ActionResult ContactandMessageDetails(int id)
         {
+            if (User.IsInRole("Admin Yardımcısı")) { return RedirectToAction("AuthorizationErrorPage", "ErrorPage"); }
             var getmessagedetails = _messageService.TGetID(id);
             return View(getmessagedetails);
         }
@@ -397,6 +398,7 @@ namespace MvcProjeKampı.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult NewMessage(Message m)
         {

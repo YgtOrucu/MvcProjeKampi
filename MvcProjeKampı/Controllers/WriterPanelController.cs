@@ -17,6 +17,7 @@ namespace MvcProjeKampı.Controllers
 {
     public class WriterPanelController : Controller
     {
+        #region ConstructorMethods
         MvcKampContext context = new MvcKampContext();
         private readonly IHeadingService _headingService;
         private readonly ICategoryService _categoryService;
@@ -31,7 +32,8 @@ namespace MvcProjeKampı.Controllers
             _messageService = new MessageManager(new EFMessageDal(), new MessageValidation());
             _contentService = new ContentManager(new EFContentDal());
         }
-        // GET: WriterPanel
+        #endregion
+
         #region ErrorPages
         public ActionResult ErrorPages()
         {
@@ -127,7 +129,6 @@ namespace MvcProjeKampı.Controllers
             ViewBag.ınboxcount = getInboxMessageCount;
             ViewBag.sentcount = getSendMessageCount;
         }
-
 
         public PartialViewResult LeftBarArea()
         {

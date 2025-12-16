@@ -85,7 +85,8 @@
                 }
             </tbody>
         </table>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modal1">Add</button>
+        @if (!User.IsInRole("Admin Yardımcısı"))
+        {<button class="btn btn-primary" data-toggle="modal" data-target="#modal1">Add</button>}
     </div>
 </div>
 

@@ -44,7 +44,8 @@
                                 <a href="/Admin/WritersHeading/@item.WriterID" class="btn btn-sm bg-teal">
                                     Headings
                                 </a>
-                                <a href="/Admin/WriterEdit/@item.WriterID" class="btn btn-warning btn-sm">Edit</a>
+                                @if (!User.IsInRole("Admin Yardımcısı"))
+                                {<a href="/Admin/WriterEdit/@item.WriterID" class="btn btn-warning btn-sm">Edit</a>}
                             </div>
                         </div>
                     </div>
