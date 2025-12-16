@@ -59,15 +59,6 @@ namespace BusinessLayer.Concreate
 
         public void TUpdate(Writer entity)
         {
-            Writer writer = new Writer()
-            {
-                WriterName = entity.WriterName,
-                WriterSurname = entity.WriterSurname,
-                WriterAbout = entity.WriterAbout,
-                WriterMail = entity.WriterMail,
-            };
-            var result = _WritervalidationRules.Validate(writer);
-            if (!result.IsValid) throw new ValidationException(result.Errors);
             _writerDal.Update(entity);
         }
     }

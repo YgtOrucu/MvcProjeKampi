@@ -137,7 +137,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -2524,9 +2523,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Category\CategoryList.cshtml" />
-    <Content Include="Views\Category\CategoryAdd.cshtml" />
-    <Content Include="Views\Category\CategoryAddError.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\Category.cshtml" />
     <Content Include="Views\Admin\CategoryAdd.cshtml" />
@@ -2569,10 +2565,12 @@
     <Content Include="Views\WriterPanel\NewMessage.cshtml" />
     <Content Include="Views\WriterPanel\WriterContentByHeading.cshtml" />
     <Content Include="Views\Login\LoginForWriter.cshtml" />
+    <Content Include="Views\Admin\SearchSendMail.cshtml" />
+    <Content Include="Views\Admin\SearchInboxMail.cshtml" />
+    <Content Include="Views\Admin\SearchTrashMail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

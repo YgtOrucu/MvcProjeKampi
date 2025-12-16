@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace MvcProjeKampı.Controllers
 {
@@ -37,7 +38,7 @@ namespace MvcProjeKampı.Controllers
             _aboutService = new AboutManager(new EFAboutDal(), new AboutValidation());
             _contactService = new ContactManager(new EFContactDal());
             _messageService = new MessageManager(new EFMessageDal(), new MessageValidation());
-            _adminService = new AdminManager(new EFAdminDal(), new AdminValidation(),new WriterLoginValidations());
+            _adminService = new AdminManager(new EFAdminDal(), new AdminValidation(), new WriterLoginValidations());
         }
         #endregion
 
@@ -154,12 +155,6 @@ namespace MvcProjeKampı.Controllers
             try
             {
                 var updatedWriter = _writerService.TGetID(w.WriterID);
-                updatedWriter.WriterName = w.WriterName;
-                updatedWriter.WriterSurname = w.WriterSurname;
-                updatedWriter.WriterImage = w.WriterImage;
-                updatedWriter.WriterMail = w.WriterMail;
-                updatedWriter.WriterPassword = w.WriterPassword;
-                updatedWriter.WriterAbout = w.WriterAbout;
                 updatedWriter.WriterStatus = w.WriterStatus;
                 _writerService.TUpdate(updatedWriter);
                 return RedirectToAction("Writer");
@@ -255,7 +250,7 @@ namespace MvcProjeKampı.Controllers
         }
 
         [HttpPost]
-        public ActionResult HeadingUptade(Heading h)
+        public ActionResult HeadingUpdate(Heading h)
         {
             var updatedheading = _headingService.TGetID(h.HeadingID);
             updatedheading.HeadingName = h.HeadingName;
@@ -421,6 +416,66 @@ namespace MvcProjeKampı.Controllers
                 return RedirectToAction("ErrorPages");
             }
         }
+
+        #region SearchSendMailToSendPage
+        [HttpPost]
+        public ActionResult SearchSendMail(string p)
+        {
+            var query = context.Messages.AsQueryable();
+
+            if (!string.IsNullOrEmpty(p))
+            {
+                query = query.Where(x => x.ReceiverMail.Contains(p) && x.SenderMail == "admin@gmail.com");
+                var values = query.ToList();
+                return View(values);
+            }
+            else
+            {
+                return RedirectToAction("SendBoxForAdmin");
+            }
+        }
+
+        #endregion
+
+        #region SearchInboxMailToInboxPage
+        public ActionResult SearchInboxMail(string p)
+        {
+            var query = context.Messages.AsQueryable();
+
+            if (!string.IsNullOrEmpty(p))
+            {
+                query = query.Where(x => x.ReceiverMail == "admin@gmail.com" && x.SenderMail.Contains(p));
+                var values = query.ToList();
+                return View(values);
+            }
+            else
+            {
+                return RedirectToAction("ContactandMessage");
+            }
+        }
+        #endregion
+
+        #region SearchTrashMailNameToDeletePage
+        [HttpPost]
+        public ActionResult SearchTrashMail(string p)
+        {
+            var query = context.Contacts.AsQueryable();
+
+            if (!string.IsNullOrEmpty(p))
+            {
+                query = query.Where(x => x.ContactStatus == false && x.UserName.Contains(p));
+                var values = query.ToList();
+                return View(values);
+            }
+            else
+            {
+                return RedirectToAction("ContactDeletedPage");
+            }
+        }
+
+        #endregion
+
+
         #endregion
 
         #region GalleryOperations
@@ -432,10 +487,19 @@ namespace MvcProjeKampı.Controllers
         #endregion
 
         #region AdminOperations
-        
+
         public ActionResult Admin()
         {
-            if(User.IsInRole("Admin Yardımcısı")) { return RedirectToAction("AuthorizationErrorPage", "ErrorPage"); }
+            #region GetRoleTypeNameandId
+            var getroletype = context.Roles.Take(2).Select(x => new SelectListItem
+            {
+                Value = x.RoleID.ToString(),
+                Text = x.RoleType
+            }).ToList();
+            ViewBag.RoleType = getroletype;
+            #endregion
+
+            if (User.IsInRole("Admin Yardımcısı")) { return RedirectToAction("AuthorizationErrorPage", "ErrorPage"); }
             var values = _adminService.TGetList();
             return View(values);
         }
@@ -460,6 +524,14 @@ namespace MvcProjeKampı.Controllers
         [HttpGet]
         public ActionResult AdminEdit(int id)
         {
+            #region GetRoleTypeNameandId
+            var values = context.Roles.Take(2).Select(x => new SelectListItem
+            {
+                Value = x.RoleID.ToString(),
+                Text = x.RoleType
+            }).ToList();
+            ViewBag.RoleType = values;
+            #endregion
             var getAdmin = _adminService.TGetID(id);
             return View("AdminEdit", getAdmin);
         }

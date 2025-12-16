@@ -7,8 +7,7 @@
 <div class="title">Admin Edit</div>
 <form action="~/Admin/AdminUpdate" method="post" class="nice-form">
     <div class="field">
-        <label for="AdminID">About ID</label>
-        @Html.TextBoxFor(x => x.AdminID, new { @class = "input", @readonly = "readonly" })
+        @Html.HiddenFor(x => x.AdminID, new { @class = "input", @readonly = "readonly" })
     </div>
 
     <div class="field">
@@ -23,7 +22,7 @@
 
     <div class="field">
         <label for="RoleID">Role Type</label>
-        @Html.TextBoxFor(x => x.RoleID, new { @class = "input" })
+        @Html.DropDownListFor(x => x.RoleID, (IEnumerable<SelectListItem>)ViewBag.RoleType, new { @class = "input" })
     </div>
 
     <div class="field">

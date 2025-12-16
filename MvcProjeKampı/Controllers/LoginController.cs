@@ -18,9 +18,10 @@ namespace MvcProjeKampı.Controllers
         private readonly IAdminService _adminService;
         public LoginController()
         {
-            _adminService = new AdminManager(new EFAdminDal(), new AdminValidation(),new WriterLoginValidations());
+            _adminService = new AdminManager(new EFAdminDal(), new AdminValidation(), new WriterLoginValidations());
         }
         // GET: Login
+        #region AdminLoginOperation
         public ActionResult Login()
         {
             return View();
@@ -33,9 +34,16 @@ namespace MvcProjeKampı.Controllers
                 var result = _adminService.TGetToUserNameAndPassword(admin.UserName, admin.Password);
                 if (result.Count != 0)
                 {
-                    FormsAuthentication.SetAuthCookie(result[0].UserName, false);
-                    Session["UserName"] = result[0].UserName;
-                    return RedirectToAction("Admin", "Admin");
+                    if (result[0].AdminStatus)
+                    {
+                        FormsAuthentication.SetAuthCookie(result[0].UserName, false);
+                        Session["UserName"] = result[0].UserName;
+                        return RedirectToAction("Admin", "Admin");
+                    }
+                    else
+                    {
+                        throw new ValidationException("Kullanıcının sisteme giriş yetkisi yoktur.Pasif Durumdadır.Lütfen Yönertici ile iletişime geçiniz !!");
+                    }
                 }
                 else
                 {
@@ -65,11 +73,14 @@ namespace MvcProjeKampı.Controllers
             Session.Abandon();
             return RedirectToAction("Login", "Login");
         }
+        #endregion
 
+        #region WriterLoginOperation
         public ActionResult LoginForWriter()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult LoginForWriter(Writer w)
         {
@@ -78,11 +89,18 @@ namespace MvcProjeKampı.Controllers
                 var result = _adminService.TGetToWriterMailAndPassword(w.WriterMail, w.WriterPassword);
                 if (result.Count != 0)
                 {
-                    FormsAuthentication.SetAuthCookie(result[0].WriterMail, false);
-                    Session["WriterMail"] = result[0].WriterMail;
-                    Session["WriterID"] = result[0].WriterID.ToString();
-                    Session["UserName"] = result[0].WriterName + " " + result[0].WriterSurname;
-                    return RedirectToAction("WriterProfile", "WriterPanel");
+                    if (result[0].WriterStatus)
+                    {
+                        FormsAuthentication.SetAuthCookie(result[0].WriterMail, false);
+                        Session["WriterMail"] = result[0].WriterMail;
+                        Session["WriterID"] = result[0].WriterID.ToString();
+                        Session["UserName"] = result[0].WriterName + " " + result[0].WriterSurname;
+                        return RedirectToAction("WriterProfile", "WriterPanel");
+                    }
+                    else
+                    {
+                        throw new ValidationException("Kullanıcının sisteme giriş yetkisi yoktur.Pasif Durumdadır.Lütfen Yönertici ile iletişime geçiniz !!");
+                    }
                 }
                 else
                 {
@@ -112,5 +130,6 @@ namespace MvcProjeKampı.Controllers
             Session.Abandon();
             return RedirectToAction("LoginForWriter", "Login");
         }
+        #endregion
     }
 }

@@ -7,43 +7,7 @@
 <div class="title">Writer Edit</div>
 <form action="~/Admin/WriterUpdate" method="post" class="nice-form">
     <div class="field">
-        <label for="WriterID">Writer ID</label>
-        @Html.TextBoxFor(x => x.WriterID, new { @class = "input", @readonly = "readonly" })
-    </div>
-
-    <div class="field">
-        <label for="WriterName">Writer Name</label>
-        @Html.TextBoxFor(x => x.WriterName, new { @class = "input" })
-    </div>
-
-    <div class="field">
-        <label for="WriterSurname">Writer Surname</label>
-        @Html.TextBoxFor(x => x.WriterSurname, new { @class = "input" })
-    </div>
-
-    <div class="field">
-        <label for="WriterImage">Writer Image</label>
-        @Html.TextBoxFor(x => x.WriterImage, new { @class = "input" })
-    </div>
-
-    <div class="field">
-        <label for="WriterMail">Writer Mail</label>
-        @Html.TextBoxFor(x => x.WriterMail, new { @class = "input" })
-    </div>
-
-    <div class="field">
-        <label for="WriterPassword">Writer Password</label>
-        @Html.TextBoxFor(x => x.WriterPassword, new { @class = "input" })
-    </div>
-
-    <div class="field">
-        <label for="WriterAbout">Writer About</label>
-        @Html.TextBoxFor(x => x.WriterAbout, new { @class = "input" })
-    </div>
-
-    <div class="field">
         <label for="WriterStatus">Writer Status</label>
-
         <div class="radio-group">
             <label class="radio">
                 @Html.RadioButtonFor(x => x.WriterStatus, true)
@@ -55,7 +19,6 @@
                 <span>Pasive</span>
             </label>
         </div>
-
     </div>
     <div class="filter">
         <button type="submit" class="submit-btn">Writer Edit</button>

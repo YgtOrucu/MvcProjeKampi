@@ -1,9 +1,11 @@
 ﻿@using EntityLayer.Concreate
 @model List<Message>
+
 @{
-    ViewBag.Title = "SendBoxForAdmin";
+    ViewBag.Title = "SearchSendMail";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
 
 <!DOCTYPE html>
 <html>
@@ -31,16 +33,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Inbox</h3>
                         <div class="card-tools">
-                            <form action="~/Admin/SearchSendMail" method="post" class="input-group input-group-sm">
-                                <input type="text"
-                                       name="p"
-                                       class="form-control"
-                                       placeholder="Search Mail" />
-
-                                <button type="submit" class="btn btn-primary btn-xs" style="width:30px">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </form>
+                            <a href="~/Admin/SendBoxForAdmin" class="btn btn-primary btn-xs" style="width:30px"><i class="fas fa fa-sign-out-alt"></i></a> 
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -75,5 +68,7 @@
     </section>
 </body>
 </html>
+
+
 
 

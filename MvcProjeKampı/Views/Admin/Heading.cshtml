@@ -12,7 +12,6 @@
         <table>
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>Name</th>
                     <th>Date</th>
                     <th>Category</th>
@@ -26,7 +25,6 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td style="font-weight:bold">@item.HeadingID</td>
                         <td>@item.HeadingName</td>
                         <td>@item.HeadingDate.ToString("dd/MM/yyyy")</td>
                         <td>@item.Category.CategoryName</td>

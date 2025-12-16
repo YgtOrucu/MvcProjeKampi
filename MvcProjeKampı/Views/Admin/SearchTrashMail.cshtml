@@ -1,46 +1,27 @@
 ﻿@using EntityLayer.Concreate
-@model List<Message>
+@model List<Contact>
+
 @{
-    ViewBag.Title = "SendBoxForAdmin";
+    ViewBag.Title = "SearchTrashMail";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <!DOCTYPE html>
 <html>
-<head>
-    <style>
-        .formClass {
-            display: flex;
-            align-items: flex-end;
-            column-gap: 20px;
-            width: 80%;
-            float: inline-end;
-        }
-    </style>
-</head>
 
 <body class="hold-transition sidebar-mini">
     <section class="content">
         <div class="row">
             <div class="col-md-3">
-                <a href="~/Admin/NewMessage" class="btn btn-primary btn-block mb-3">New Message</a>
+                <a href="~/Admin/Contact" class="btn btn-primary btn-block mb-3">Return To UserMessage</a>
                 @Html.Action("LeftBarArea", "Admin")
             </div>
             <div class="col-md-9">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">Inbox</h3>
+                        <h3 class="card-title">Trash Messages</h3>
                         <div class="card-tools">
-                            <form action="~/Admin/SearchSendMail" method="post" class="input-group input-group-sm">
-                                <input type="text"
-                                       name="p"
-                                       class="form-control"
-                                       placeholder="Search Mail" />
-
-                                <button type="submit" class="btn btn-primary btn-xs" style="width:30px">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </form>
+                            <a href="~/Admin/ContactDeletedPage" class="btn btn-primary btn-xs" style="width:30px"><i class="fas fa fa-sign-out-alt"></i></a>
                         </div>
                     </div>
                     <div class="card-body p-0">
@@ -57,12 +38,12 @@
                                                 </div>
                                             </td>
                                             <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
-                                            <td class="mailbox-name"><a href="~/Admin/ContactandMessageDetails/@item.MessageID">@item.SenderMail</a></td>
+                                            <td class="mailbox-name">@item.UserName</td>
                                             <td class="mailbox-subject">
-                                                <b>@item.MessageSubject</b> - @item.MessageContent.Substring(0, 30) ...
+                                                <b>@item.Subject</b> - @item.Message.Substring(0, 30) ...
                                             </td>
                                             <td class="mailbox-attachment"></td>
-                                            <td class="mailbox-read-time">@item.MessageDate.ToString("dd MMM. yyyy")</td>
+                                            <td class="mailbox-read-time">@item.ContactDate.ToString("dd MMM. yyyy")</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -75,5 +56,7 @@
     </section>
 </body>
 </html>
+
+
 
 

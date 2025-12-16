@@ -7,8 +7,7 @@
 <div class="title">Heading Edit</div>
 <form action="~/Admin/HeadingUpdate" method="post" class="nice-form">
     <div class="field">
-        <label for="HeadingID">Heading ID</label>
-        @Html.TextBoxFor(x => x.HeadingID, new { @class = "input", @readonly = "readonly" })
+        @Html.HiddenFor(x => x.HeadingID, new { @class = "input", @readonly = "readonly" })
     </div>
 
     <div class="field">
