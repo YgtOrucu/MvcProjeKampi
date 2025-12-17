@@ -42,6 +42,11 @@ namespace BusinessLayer.Concreate
             _contentDal.Insert(entity);
         }
 
+        public List<Content> TListContentTheOnesWithTheTrueHeading()
+        {
+            return _contentDal.ListContentTheOnesWithTheTrueHeading();
+        }
+
         public List<Content> TListToFilter(Expression<Func<Content, bool>> filter)
         {
             return _contentDal.ListToFilter(filter);

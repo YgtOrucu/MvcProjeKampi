@@ -140,6 +140,7 @@
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\WriterPanelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2019,6 +2020,11 @@
     <Content Include="AdminThema\login-form-20\js\main.js" />
     <Content Include="AdminThema\login-form-20\js\popper.js" />
     <Content Include="AdminThema\login-form-20\main.html" />
+    <Content Include="AdminThema\startbootstrap-resume-gh-pages\assets\img\favicon.ico" />
+    <Content Include="AdminThema\startbootstrap-resume-gh-pages\assets\img\profile.jpg" />
+    <Content Include="AdminThema\startbootstrap-resume-gh-pages\css\styles.css" />
+    <Content Include="AdminThema\startbootstrap-resume-gh-pages\index.html" />
+    <Content Include="AdminThema\startbootstrap-resume-gh-pages\js\scripts.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -2568,6 +2574,10 @@
     <Content Include="Views\Admin\SearchSendMail.cshtml" />
     <Content Include="Views\Admin\SearchInboxMail.cshtml" />
     <Content Include="Views\Admin\SearchTrashMail.cshtml" />
+    <Content Include="Views\Users\Heading.cshtml" />
+    <Content Include="Views\Users\Content.cshtml" />
+    <Content Include="Views\Users\ContentByHeading.cshtml" />
+    <Content Include="Views\Users\ErrorPages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

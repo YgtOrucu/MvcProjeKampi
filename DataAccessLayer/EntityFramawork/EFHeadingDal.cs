@@ -18,5 +18,11 @@ namespace DataAccessLayer.EntityFramawork
             var values = c.Headings.Where(x => x.WriterID == id).ToList();
             return values;
         }
+
+        public List<Heading> ListTheTRUEHeadingsForUsers()
+        {
+            var values = c.Headings.Where(x => x.HeadingStatus == true).ToList();
+            return values;
+        }
     }
 }

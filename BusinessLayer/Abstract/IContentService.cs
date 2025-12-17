@@ -10,5 +10,7 @@ namespace BusinessLayer.Abstract
     public interface IContentService : IGenericService<Content>
     {
         List<Content> TGetListContentByHeading(int id);
+        List<Content> TListContentTheOnesWithTheTrueHeading();
+
     }
 }

@@ -18,5 +18,28 @@ namespace DataAccessLayer.EntityFramawork
             var values = c.Contents.Where(x => x.HeadingID == id).ToList();
             return values;
         }
+
+        public List<Content> ListContentTheOnesWithTheTrueHeading()
+        {
+            List<int> ListOnesWithTrueHeading = new List<int>();
+            List<Content> GetListContent = new List<Content>();
+
+            var values = c.Headings.Where(x => x.HeadingStatus).Select(y => y.HeadingID).ToList();
+
+            foreach (var item in values)
+            {
+                ListOnesWithTrueHeading.Add(item);
+            }
+
+            for (int i = 0; i < ListOnesWithTrueHeading.Count; i++)
+            {
+                int id = ListOnesWithTrueHeading[i];
+                var getlistContent = c.Contents.Where(x => x.HeadingID == id).ToList();
+
+                GetListContent.AddRange(getlistContent);
+            }
+
+            return GetListContent;
+        }
     }
 }

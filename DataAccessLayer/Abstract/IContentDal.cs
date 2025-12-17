@@ -10,5 +10,7 @@ namespace DataAccessLayer.Abstract
     public interface IContentDal : IGenericDal<Content>
     {
         List<Content> GetListContentByHeading(int id);
+
+        List<Content> ListContentTheOnesWithTheTrueHeading();
     }
 }

@@ -53,6 +53,11 @@ namespace BusinessLayer.Concreate
             _headingDal.Insert(entity);
         }
 
+        public List<Heading> TListTheTRUEHeadingsForUsers()
+        {
+            return _headingDal.ListTheTRUEHeadingsForUsers();
+        }
+
         public List<Heading> TListToFilter(Expression<Func<Heading, bool>> filter)
         {
             return _headingDal.ListToFilter(filter);

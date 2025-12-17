@@ -10,5 +10,7 @@ namespace BusinessLayer.Abstract
     public interface IHeadingService : IGenericService<Heading>
     {
         List<Heading> TGetListByWriter(int id);
+        List<Heading> TListTheTRUEHeadingsForUsers();
+
     }
 }

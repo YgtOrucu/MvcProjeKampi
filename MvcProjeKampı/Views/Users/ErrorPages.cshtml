@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "ErrorPages";
+    var errors = TempData["ValidationErrors"] as string;
+    var RedirectToAction = TempData["RedirectToAction"] as string;
+}
+<style>
+    .error-card {
+    max-width: 520px;
+    margin: 60px auto;
+    padding: 32px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    animation: fadeIn 0.4s ease;
+}
+
+.error-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #dc2626; /* soft red */
+    margin-bottom: 16px;
+}
+
+.error-box {
+    background: #fef2f2;
+    color: #991b1b;
+    padding: 16px;
+    border-radius: 12px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.error-box ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.error-box li {
+    margin-bottom: 6px;
+}
+
+.return-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #dc2626;
+    color: #ffffff;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.return-btn:hover {
+    background: #b91c1c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(220, 38, 38, 0.35);
+}
+
+</style>
+<div class="error-card">
+    <h4 class="error-title">Error</h4>
+
+    <div class="error-box">
+        @Html.Raw(errors)
+    </div>
+
+    <a href="@Url.Action(RedirectToAction)" class="return-btn">Return</a>
+</div>
