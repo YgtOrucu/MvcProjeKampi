@@ -92,9 +92,17 @@ namespace MvcProjeKampı.Controllers
                     if (result[0].WriterStatus)
                     {
                         FormsAuthentication.SetAuthCookie(result[0].WriterMail, false);
-                        Session["WriterMail"] = result[0].WriterMail;
-                        Session["WriterID"] = result[0].WriterID.ToString();
-                        Session["UserName"] = result[0].WriterName + " " + result[0].WriterSurname;
+                        var writer = result[0];
+
+                        Session["Writer"] = new SessionForWriter
+                        {
+                            WriterMail = writer.WriterMail,
+                            WriterID = writer.WriterID.ToString(),
+                            UserName = $"{writer.WriterName} {writer.WriterSurname}",
+                            WriterImage = writer.WriterImage
+                        };
+
+
                         return RedirectToAction("WriterProfile", "WriterPanel");
                     }
                     else
@@ -128,6 +136,7 @@ namespace MvcProjeKampı.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
+            Session.Remove("Writer");
             return RedirectToAction("LoginForWriter", "Login");
         }
         #endregion

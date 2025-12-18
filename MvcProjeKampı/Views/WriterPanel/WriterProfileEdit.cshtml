@@ -1,0 +1,132 @@
+﻿@model EntityLayer.Concreate.Writer
+@{
+    ViewBag.Title = "WriterProfileEdit";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+<style>
+    /*Crud Page*/
+    .nice-form {
+        max-width: 70%;
+        background: #ffffff;
+        padding: 28px;
+        margin: 1rem 0 0 1rem;
+        border-radius: 12px;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+        font-family: "Inter", sans-serif;
+    }
+
+    .field {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+        .field label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+    .input {
+        padding: 10px 14px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        outline: none;
+        font-size: 14px;
+        transition: 0.2s;
+    }
+
+        .input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+        }
+
+    .radio-group {
+        display: flex;
+        gap: 20px;
+        margin-top: 5px;
+    }
+
+    .radio {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+        .radio input {
+            width: 16px;
+            height: 16px;
+        }
+
+    .submit-btn {
+        margin-top: 10px;
+        width: 20%;
+        padding: 7px 0;
+        background: #3b82f6;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+        .submit-btn:hover {
+            background: #2563eb;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+        }
+
+    .btn-danger {
+        margin-top: 10px;
+        padding: 9px 15px;
+        background: #dc3545;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+        .btn-danger:hover {
+            background: #cb0013;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25);
+        }
+    /*Add Page*/
+</style>
+
+<div class="title">Writer Edit</div>
+
+<form action="/WriterPanel/WriterProfileUpdate" method="post" class="nice-form">
+    <div class="field">
+        @Html.HiddenFor(x => x.WriterID, new { @class = "input" })
+    </div>
+
+    <div class="field">
+        <label for="WriterImage">WriterImage</label>
+        @Html.TextBoxFor(x => x.WriterImage, new { @class = "input" })
+    </div>
+
+    <div class="field">
+        <label for="WriterPassword">Password</label>
+        @Html.TextBoxFor(x => x.WriterPassword, new { @class = "input" })
+    </div>
+
+    <div class="field">
+        <label for="WriterAbout">About</label>
+        @Html.TextBoxFor(x => x.WriterAbout, new { @class = "input" })
+    </div>
+
+    <div class="filter">
+        <button type="submit" class="submit-btn">Writer Edit</button>
+        <a href="~/WriterPanel/WriterProfile" class="btn-danger">Return Writer Profile</a>
+    </div>
+</form>
+
+

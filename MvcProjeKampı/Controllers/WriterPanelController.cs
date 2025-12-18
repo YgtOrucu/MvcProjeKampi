@@ -23,6 +23,7 @@ namespace MvcProjeKampı.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IMessageService _messageService;
         private readonly IContentService _contentService;
+        private readonly IWriterService _writerService;
 
 
         public WriterPanelController()
@@ -31,6 +32,7 @@ namespace MvcProjeKampı.Controllers
             _categoryService = new CategoryManager(new EFCategoryDal(), new CategoryValitadions());
             _messageService = new MessageManager(new EFMessageDal(), new MessageValidation());
             _contentService = new ContentManager(new EFContentDal());
+            _writerService = new WriterManager(new EFWriterDal(), new WriterValitadion());
         }
         #endregion
 
@@ -41,16 +43,40 @@ namespace MvcProjeKampı.Controllers
         }
         #endregion
 
+        #region WriterProfile
         public ActionResult WriterProfile()
         {
-            return View();
+            var writer = Session["Writer"] as SessionForWriter;
+            int writerıd = Convert.ToInt32(writer.WriterID);
+            var getwriter = _writerService.TGetID(writerıd);
+            return View(getwriter);
         }
+
+        public ActionResult WriterProfileEdit(int id)
+        {
+            var getwriter = _writerService.TGetID(id);
+            return View("WriterProfileEdit", getwriter);
+        }
+
+        [HttpPost]
+        public ActionResult WriterProfileUpdate(Writer w)
+        {
+            var updatedwriter = _writerService.TGetID(w.WriterID);
+
+            updatedwriter.WriterImage = w.WriterImage;
+            updatedwriter.WriterPassword = w.WriterPassword;
+            updatedwriter.WriterAbout = w.WriterAbout;
+            _writerService.TUpdate(updatedwriter);
+            return RedirectToAction("WriterProfile");
+        }
+        #endregion
 
         #region WriterHeadingOperations
         public ActionResult WriterHeadings()
         {
-            int id = Convert.ToInt32(Session["WriterID"]);
-            var values = _headingService.TGetListByWriter(id);
+            var writer = Session["Writer"] as SessionForWriter;
+            int writerıd = Convert.ToInt32(writer.WriterID);
+            var values = _headingService.TGetListByWriter(writerıd);
             return View(values);
         }
 
@@ -79,9 +105,10 @@ namespace MvcProjeKampı.Controllers
         {
             try
             {
+                var writer = Session["Writer"] as SessionForWriter;
                 h.HeadingStatus = true;
                 h.HeadingDate = DateTime.Now;
-                h.WriterID = Convert.ToInt32(Session["WriterID"]);
+                h.WriterID = Convert.ToInt32(writer.WriterID);
                 _headingService.TInsert(h);
                 return RedirectToAction("WriterHeadings");
             }
@@ -123,7 +150,9 @@ namespace MvcProjeKampı.Controllers
 
         public void InboxAndSentForWriterMessageCount()
         {
-            string mail = Session["WriterMail"].ToString();
+
+            var writer = Session["Writer"] as SessionForWriter;
+            string mail = writer.WriterMail;
             int getInboxMessageCount = _messageService.TTotalNumberOfWriterInbox(mail);
             int getSendMessageCount = _messageService.TTotalNumberOfWriterSent(mail);
             ViewBag.ınboxcount = getInboxMessageCount;
@@ -138,14 +167,16 @@ namespace MvcProjeKampı.Controllers
 
         public ActionResult WriterMessageInbox()
         {
-            string mail = Session["WriterMail"].ToString();
+            var writer = Session["Writer"] as SessionForWriter;
+            string mail = writer.WriterMail;
             var Inboxlist = _messageService.TListInboxForWriterUser(mail);
             return View(Inboxlist);
         }
 
         public ActionResult WriterMessageSend()
         {
-            string mail = Session["WriterMail"].ToString();
+            var writer = Session["Writer"] as SessionForWriter;
+            string mail = writer.WriterMail;
             var Sendlist = _messageService.TListSenderForWriterUser(mail);
             return View(Sendlist);
         }
@@ -166,7 +197,8 @@ namespace MvcProjeKampı.Controllers
         {
             try
             {
-                m.SenderMail = Session["WriterMail"].ToString();
+                var writer = Session["Writer"] as SessionForWriter;
+                m.SenderMail = writer.WriterMail;
                 m.MessageDate = DateTime.Now;
                 _messageService.TInsert(m);
                 return RedirectToAction("WriterMessageSend");

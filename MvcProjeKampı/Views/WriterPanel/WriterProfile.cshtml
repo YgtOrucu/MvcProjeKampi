@@ -1,8 +1,150 @@
-﻿
+﻿@model EntityLayer.Concreate.Writer
+
 @{
     ViewBag.Title = "WriterProfile";
     Layout = "~/Views/Shared/_WriterLayout.cshtml";
 }
 
-<h2>WriterProfile</h2>
+<style>
+    .writer-profile-card {
+        max-width: 520px;
+        margin: 60px auto;
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        animation: fadeIn 0.4s ease;
+    }
+
+    .profile-header {
+        background: linear-gradient(135deg, #0056b3, #1d4ed8);
+        padding: 32px;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    .profile-avatar {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #ffffff;
+        margin-bottom: 12px;
+    }
+
+    .writer-name {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 8px 0 4px;
+    }
+
+    .writer-mail {
+        font-size: 14px;
+        opacity: 0.9;
+    }
+
+    .status-badge {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 6px 16px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+        .status-badge.active {
+            background: #16a34a;
+            color: #ffffff;
+        }
+
+        .status-badge.passive {
+            background: #dc2626;
+            color: #ffffff;
+        }
+
+    .profile-body {
+        padding: 28px;
+    }
+
+        .profile-body h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+
+        .profile-body p {
+            color: #334155;
+            line-height: 1.7;
+        }
+
+    .profile-footer {
+        padding: 20px 28px;
+        display: flex;
+        justify-content: flex-end;
+        column-gap:50px;
+        background: #f8fafc;
+    }
+
+    .return-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        background: #0056b3;
+        color: #ffffff;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.25s ease;
+    }
+
+        .return-btn:hover {
+            background: #003f87;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(0, 86, 179, 0.35);
+        }
+</style>
+
+
+<div class="writer-profile-card">
+    <div class="profile-header">
+        <img src="@Model.WriterImage" alt="Writer Image" class="profile-avatar" />
+
+        <h2 class="writer-name">
+            @Model.WriterName @Model.WriterSurname
+        </h2>
+
+        <span class="writer-mail">@Model.WriterMail</span>
+
+        @if (Model.WriterStatus)
+        {
+            <span class="status-badge active">Active</span>
+        }
+        else
+        {
+            <span class="status-badge passive">Passive</span>
+        }
+    </div>
+
+    <div class="profile-body">
+        <h4>About</h4>
+        <p>
+            @Model.WriterAbout
+        </p>
+    </div>
+
+    <div class="profile-footer">
+        <a href="@Url.Action("WriterProfileEdit", "WriterPanel", new {id = Model.WriterID})" class="return-btn">
+            <i class="fas fa-edit"></i>
+           Edit
+        </a>
+
+        <a href="@Url.Action("WriterHeadings", "WriterPanel")" class="return-btn">
+            <i class="fas fa-arrow-left"></i>
+            Back to Heading
+        </a>
+    </div>
+</div>
 

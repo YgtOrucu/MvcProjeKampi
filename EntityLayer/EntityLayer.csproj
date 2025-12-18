@@ -60,6 +60,7 @@
     <Compile Include="Concreate\ImagesFile.cs" />
     <Compile Include="Concreate\Message.cs" />
     <Compile Include="Concreate\Role.cs" />
+    <Compile Include="Concreate\SessionForWriter.cs" />
     <Compile Include="Concreate\Writer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

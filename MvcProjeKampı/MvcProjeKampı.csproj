@@ -2585,6 +2585,7 @@
     <Content Include="Views\Users\Content.cshtml" />
     <Content Include="Views\Users\ContentByHeading.cshtml" />
     <Content Include="Views\Users\ErrorPages.cshtml" />
+    <Content Include="Views\WriterPanel\WriterProfileEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
