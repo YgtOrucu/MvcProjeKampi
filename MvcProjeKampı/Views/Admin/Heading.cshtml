@@ -1,10 +1,26 @@
 ﻿@using EntityLayer.Concreate
-@model List<Heading>
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<Heading>
 @{
     ViewBag.Title = "Heading";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<style>
+    .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 32px;
+}
 
+.pagination .page-item {
+    list-style: none;
+}
+
+
+
+</style>
 <div class="table-card">
     <div class="title">Heading List</div>
 
@@ -46,7 +62,12 @@
         {<a href="/Admin/HeadingAdd" class="add-btn">Add Heading</a>}
     </div>
 </div>
-
+@Html.PagedListPager(
+    (IPagedList)Model,
+    page => Url.Action("Heading", new { page }),new PagedListRenderOptions
+    {
+        LiElementClasses = new List<string> { "page-item" }
+    })
 
 
 

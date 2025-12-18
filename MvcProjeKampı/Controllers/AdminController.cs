@@ -6,6 +6,7 @@ using DataAccessLayer.Context;
 using DataAccessLayer.EntityFramawork;
 using EntityLayer.Concreate;
 using FluentValidation;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -170,9 +171,9 @@ namespace MvcProjeKampı.Controllers
         #endregion
 
         #region HeadingOperations
-        public ActionResult Heading()
+        public ActionResult Heading(int page = 1)
         {
-            var values = _headingService.TGetList();
+            var values = _headingService.TGetList().ToPagedList(page, 4);
             return View(values);
         }
         [HttpGet]

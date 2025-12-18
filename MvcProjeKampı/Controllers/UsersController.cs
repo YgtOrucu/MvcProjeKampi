@@ -33,6 +33,7 @@ namespace MvcProjeKampı.Controllers
         #endregion
         public ActionResult Heading()
         {
+            if (User.IsInRole("Admin Yardımcısı")) { return RedirectToAction("AuthorizationErrorPage", "ErrorPage"); }
             var values = _headingService.TListTheTRUEHeadingsForUsers();
             return View(values);
         }
