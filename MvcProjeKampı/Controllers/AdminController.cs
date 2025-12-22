@@ -262,6 +262,12 @@ namespace MvcProjeKampı.Controllers
             _headingService.TUpdate(updatedheading);
             return RedirectToAction("Heading");
         }
+
+        public ActionResult HeadingReports()
+        {
+            var values = _headingService.TGetList();
+            return View(values);
+        }
         #endregion
 
         #region ContentOperations
@@ -557,6 +563,30 @@ namespace MvcProjeKampı.Controllers
                 var errormessage = string.Join("<br>", ex.Errors.Select(x => x.ErrorMessage));
                 TempData["ValidationErrors"] = errormessage;
                 TempData["RedirectToAction"] = "Admin";
+                return RedirectToAction("ErrorPages");
+            }
+        }
+        #endregion
+
+        #region Writtings Operations
+        public ActionResult Writtings()
+        {
+            var values = _contentService.TGetList();
+            return View(values);
+        }
+
+        public ActionResult SearchContentHeading(string p)
+        {
+            var values = _contentService.TGetListBySearchBox(p);
+
+            if (values.Count != 0)
+            {
+                return View(values);
+            }
+            else
+            {
+                TempData["ValidationErrors"] = "Başlık bulunamadı.Lütfen tekrar deneyiniz!!!";
+                TempData["RedirectToAction"] = "Writtings";
                 return RedirectToAction("ErrorPages");
             }
         }

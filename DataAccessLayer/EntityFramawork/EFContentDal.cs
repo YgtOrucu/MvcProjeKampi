@@ -5,6 +5,7 @@ using EntityLayer.Concreate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,7 @@ namespace DataAccessLayer.EntityFramawork
     public class EFContentDal : GenericRepository<Content>, IContentDal
     {
         MvcKampContext c = new MvcKampContext();
+
         public List<Content> GetListContentByHeading(int id)
         {
             var values = c.Contents.Where(x => x.HeadingID == id).ToList();
@@ -40,6 +42,22 @@ namespace DataAccessLayer.EntityFramawork
             }
 
             return GetListContent;
+        }
+
+        public List<Content> GetListBySearchBox(string p)
+        {
+            var query = c.Contents.AsQueryable();
+
+            if (!string.IsNullOrEmpty(p))
+            {
+                query = query.Where(x => x.Heading.HeadingName.Contains(p));
+                var values = query.ToList();
+                return values;
+            }
+            else
+            {
+                return new List<Content>();
+            }
         }
     }
 }

@@ -11,6 +11,7 @@ namespace BusinessLayer.Abstract
     {
         List<Content> TGetListContentByHeading(int id);
         List<Content> TListContentTheOnesWithTheTrueHeading();
+        List<Content> TGetListBySearchBox(string p);
 
     }
 }

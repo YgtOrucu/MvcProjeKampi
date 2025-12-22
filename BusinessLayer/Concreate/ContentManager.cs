@@ -32,6 +32,11 @@ namespace BusinessLayer.Concreate
             return _contentDal.GetList();
         }
 
+        public List<Content> TGetListBySearchBox(string p)
+        {
+            return _contentDal.GetListBySearchBox(p);
+        }
+
         public List<Content> TGetListContentByHeading(int id)
         {
             return _contentDal.GetListContentByHeading(id);

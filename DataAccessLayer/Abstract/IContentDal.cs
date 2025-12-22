@@ -12,5 +12,7 @@ namespace DataAccessLayer.Abstract
         List<Content> GetListContentByHeading(int id);
 
         List<Content> ListContentTheOnesWithTheTrueHeading();
+
+        List<Content> GetListBySearchBox(string p);
     }
 }
