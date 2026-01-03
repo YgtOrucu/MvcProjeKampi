@@ -1,0 +1,30 @@
+﻿
+<div class="modal fade" id="exampleAdminModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="login px-4 mx-auto mw-100">
+                    <h5 class="text-center mb-4">ADMİN GİRİŞİ</h5>
+                    <form action="@Url.Action("LoginSıngIn","Login")" method="post">
+                        <div class="form-group">
+                            <label class="mb-2">Kullanıcı Adı</label>
+                            <input type="text" name="UserName" class="form-control" placeholder="Kullanıcı Adı" required="">
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-2">Şifre</label>
+                            <input type="password" name="Password" class="form-control" placeholder="Şifre" required="">
+                        </div>
+                        <button type="submit" class="btn btn-primary submit mb-4">Giriş Yap</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

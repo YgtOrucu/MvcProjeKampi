@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace MvcProjeKampı.Controllers
 {
+    [AllowAnonymous]
     public class UsersController : Controller
     {
         #region ConstructorMethods
@@ -34,7 +35,7 @@ namespace MvcProjeKampı.Controllers
         public ActionResult Heading()
         {
             if (User.IsInRole("Admin Yardımcısı")) { return RedirectToAction("AuthorizationErrorPage", "ErrorPage"); }
-            var values = _headingService.TListTheTRUEHeadingsForUsers();
+            var values = _headingService.TGetHeadingNameAndCount();
             return View(values);
         }
 

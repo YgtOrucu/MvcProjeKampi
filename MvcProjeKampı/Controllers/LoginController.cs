@@ -12,7 +12,6 @@ using System.Web.Security;
 
 namespace MvcProjeKampı.Controllers
 {
-    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly IAdminService _adminService;
@@ -21,11 +20,16 @@ namespace MvcProjeKampı.Controllers
             _adminService = new AdminManager(new EFAdminDal(), new AdminValidation(), new WriterLoginValidations());
         }
         // GET: Login
+
+
         #region AdminLoginOperation
         public ActionResult Login()
         {
             return View();
         }
+
+
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult LoginSıngIn(Admin admin)
         {
@@ -63,7 +67,7 @@ namespace MvcProjeKampı.Controllers
                 {
                     ModelState.AddModelError("", ex.Message);
                 }
-                return View("Login");
+                return RedirectToAction("HomePage","Home");
             }
         }
 
@@ -71,7 +75,7 @@ namespace MvcProjeKampı.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
-            return RedirectToAction("Login", "Login");
+            return RedirectToAction("HomePage", "Home");
         }
         #endregion
 
@@ -81,6 +85,8 @@ namespace MvcProjeKampı.Controllers
             return View();
         }
 
+
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult LoginForWriter(Writer w)
         {
@@ -128,7 +134,7 @@ namespace MvcProjeKampı.Controllers
                 {
                     ModelState.AddModelError("", ex.Message);
                 }
-                return View("LoginForWriter");
+                return RedirectToAction("HomePage", "Home");
             }
         }
 
@@ -137,7 +143,7 @@ namespace MvcProjeKampı.Controllers
             FormsAuthentication.SignOut();
             Session.Abandon();
             Session.Remove("Writer");
-            return RedirectToAction("LoginForWriter", "Login");
+            return RedirectToAction("HomePage", "Home");
         }
         #endregion
     }

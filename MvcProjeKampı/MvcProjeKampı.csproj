@@ -2653,6 +2653,13 @@
     <Content Include="Views\Admin\Writtings.cshtml" />
     <Content Include="Views\Admin\SearchContentHeading.cshtml" />
     <Content Include="Views\Admin\HeadingReports.cshtml" />
+    <Content Include="Views\HomePagePartial\HeadPartial.cshtml" />
+    <Content Include="Views\HomePagePartial\NavbarPartial.cshtml" />
+    <Content Include="Views\HomePagePartial\GalleryPartial.cshtml" />
+    <Content Include="Views\HomePagePartial\FooterPartial.cshtml" />
+    <Content Include="Views\HomePagePartial\AdminLoginPartial.cshtml" />
+    <Content Include="Views\HomePagePartial\WriterLoginPartial.cshtml" />
+    <Content Include="Views\HomePagePartial\ScriptPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

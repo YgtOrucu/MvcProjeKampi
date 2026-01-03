@@ -105,19 +105,88 @@
             border-radius: 50px;
             font-size: 13px;
         }
+
+        .timeline-item {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 0.8rem; /* daha az padding */
+            margin-left: auto;
+            margin-bottom: 4rem; /* kartlar arası mesafe küçültüldü */
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            border-left: 4px solid #0056B3;
+            transition: transform 0.2s ease;
+            max-width: 75%; /* genişliği sınırladık */
+        }
+
+            .timeline-item:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            }
+
+        .timeline-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+            .timeline-header i {
+                background: #0056B3;
+                color: #fff;
+                border-radius: 50%;
+                padding: 6px; /* ikon küçültüldü */
+                font-size: 14px;
+                margin-right: 0.6rem;
+            }
+
+        .writer-name {
+            color: #0b0d2e;
+            font-weight: bold;
+            font-size: 0.9rem; /* yazı boyutu küçültüldü */
+        }
+
+        .heading {
+            display: block;
+            color: #0056B3;
+            font-weight: bold;
+            margin-bottom: 0.6rem;
+            font-size: 1rem;
+        }
+
+        .content {
+            margin: 10px 0;
+            color: #222;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+
+        .date {
+            font-size: 0.75rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+        }
+
+            .date i {
+                margin-right: 4px;
+                color: #0056B3;
+            }
+
+            .date span {
+                font-weight: bold;
+                color: #333;
+            }
     </style>
 
 </head>
 <body>
 
     <div class="sidebar">
-        <div class="profile">
-            <img src="~/AdminThema/AdminLTE-3.0.4/dist/img/user2-160x160.jpg" />
-            <h5>Users</h5>
+        <div class="profile">    
+            <h5>Tüm Başlıklar</h5>
         </div>
         @foreach (var item in Model)
         {
-            <a href="~/Users/ContentByHeading/@item.HeadingID">@item.HeadingName</a>
+            <a href="~/Users/ContentByHeading/@item.HeadingID">@(item.HeadingName + $" ({item.Count})")</a>
         }
     </div>
 

@@ -2,6 +2,7 @@
 using BusinessLayer.Valitadions;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concreate;
+using EntityLayer.Models;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,11 @@ namespace BusinessLayer.Concreate
         public void TDelete(Heading entity)
         {
             _headingDal.Delete(entity);
+        }
+
+        public List<HeadingCountDto> TGetHeadingNameAndCount()
+        {
+            return _headingDal.GetHeadingNameAndCount();
         }
 
         public Heading TGetID(int id)

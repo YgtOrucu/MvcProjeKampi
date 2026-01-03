@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Concreate;
+using EntityLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace DataAccessLayer.Abstract
     {
         List<Heading> GetListByWriter(int id);
         List<Heading> ListTheTRUEHeadingsForUsers();
+
+        List<HeadingCountDto> GetHeadingNameAndCount();
     }
 }

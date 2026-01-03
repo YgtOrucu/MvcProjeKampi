@@ -1,0 +1,95 @@
+﻿<script src="~/AdminThema/web/js/jquery-2.2.3.min.js"></script>
+<!-- banner-type-text -->
+<script src='~/AdminThema/web/js/aos.js'></script>
+<script>
+    AOS.init({
+        easing: 'ease-out-back',
+        duration: 1000
+    });
+
+</script>
+<!-- sticky nav bar-->
+<script>
+    $(() => {
+
+        //On Scroll Functionality
+        $(window).scroll(() => {
+            var windowTop = $(window).scrollTop();
+            windowTop > 100 ? $('nav').addClass('navShadow') : $('nav').removeClass('navShadow');
+            windowTop > 100 ? $('ul.nav-honey').css('top', '50px') : $('ul.nav-honey').css('top', '160px');
+        });
+
+        //Click Logo To Scroll To Top
+        $('#logo').on('click', () => {
+            $('html,body').animate({
+                scrollTop: 0
+            }, 500);
+        });
+        $('#menu-toggle').on('click', () => {
+            $('#menu-toggle').toggleClass('closeMenu');
+            $('ul').toggleClass('showMenu');
+
+            $('li').on('click', () => {
+                $('ul').removeClass('showMenu');
+                $('#menu-toggle').removeClass('closeMenu');
+            });
+        });
+
+    });
+
+</script>
+<!-- //sticky nav bar -->
+<!-- Include jQuery Timeline Plugin -->
+<script src="~/AdminThema/web/js/jquery.roadmap.js"></script>
+
+<!-- simpleLightbox -->
+<script src="~/AdminThema/web/js/simpleLightbox.js"></script>
+<script>
+    $('.proj_gallery_grid a').simpleLightbox();
+
+</script>
+<!-- //simpleLightbox -->
+<!-- stats -->
+<script src="~/AdminThema/web/js/jquery.waypoints.min.js"></script>
+<script src="~/AdminThema/web/js/jquery.countup.js"></script>
+<script>
+    $('.counter').countUp();
+
+</script>
+<!-- //stats -->
+<!--/ start-smoth-scrolling -->
+<script src="~/AdminThema/web/js/move-top.js"></script>
+<script src="~/AdminThema/web/js/easing.js"></script>
+<script>
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({
+                scrollTop: $(this.hash).offset().top
+            }, 900);
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        /*
+                                var defaults = {
+                                      containerID: 'toTop', // fading element id
+                                    containerHoverID: 'toTopHover', // fading element hover id
+                                    scrollSpeed: 1200,
+                                    easingType: 'linear'
+                                 };
+                                */
+
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+
+    });
+
+</script>
+<!--// end-smoth-scrolling -->
+<!-- //js -->
+
+<script src="~/AdminThema/web/js/bootstrap.js"></script>
